@@ -12,7 +12,7 @@ install:
 - sudo apt-get install -y python-software-properties
 - sudo add-apt-repository -y ppa:chris-lea/node.js
 - sudo apt-get update -y
-- sudo apt-get install -y nodejs npm
+- sudo apt-get install -y nodejs
 - sudo npm -g install cordova ionic
 - npm install
 - bower install
