@@ -9,9 +9,9 @@ before_install:
 - echo "Before install stage"
 install:
 - echo "Install stage"
-- sudo apt-get install python-software-properties
-- sudo add-apt-repository ppa:chris-lea/node.js
-- sudo apt-get update
+- sudo apt-get install -y python-software-properties
+- sudo add-apt-repository -y ppa:chris-lea/node.js
+- sudo apt-get update -y
 - sudo apt-get install -y nodejs npm
 - sudo npm -g install cordova ionic
 - npm install
