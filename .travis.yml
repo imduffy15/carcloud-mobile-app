@@ -16,6 +16,7 @@ install:
 - sudo npm -g install cordova ionic bower gulp
 - sudo npm install
 - bower install
+- mkdir {platforms,plugins}
 - ionic platform add android
 before_script:
 - echo "Before script stage"
@@ -28,10 +29,13 @@ after_failure:
 - echo "After failure stage"
 after_script:
 - echo "After script stage"
+before_deploy:
+- git fetch --tags
 deploy:
   provider: releases
   api_key:
     secure: O6zuQzSv6husuKQkm3XOF2w8wMtxf6osgsN2xisZoGXJoSdk3n5abM17XI23MTzl57CsNnNnk0aASp2gkCUkMvyrXwmVY1aph61ehr6OunNvAnmXsMUF02nglKhmIzMAq7FMOtR/3f4sd1cCeROTEDpZYovFPNnsFIKgrFU4wwM=
   file: platforms/android/out/CarCloud-debug-unaligned.apk
   on:
-    repo: imduffy15/carcloud-mobile-app
+    tags: true
+    all_branches: true
