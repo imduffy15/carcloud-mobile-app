@@ -1,5 +1,7 @@
 # CarCloud
 
+[![Build Status](https://travis-ci.org/imduffy15/carcloud-mobile-app.svg)](https://travis-ci.org/imduffy15/carcloud-mobile-app)
+
 ## Description
 
 The internet of things is a computing vision where everyday physical objects will be connected to the internet and to identify themselves to other devices.
