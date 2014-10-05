@@ -45,7 +45,7 @@ carcloudApp.factory('AuthenticationSharedService', function ($rootScope, $http, 
     return {
         login: function (param) {
             var data = "username=" + param.username + "&password=" + param.password + "&grant_type=password&scope=read%20write&client_secret=" + API_DETAILS.clientSecret +"&client_id=" + API_DETAILS.clientId;
-            var loading = $ionicLoading.show({template: '<i class="icon ion-loading-d"></i> Logging in...', delay: 500});
+            $ionicLoading.show({template: '<i class="icon ion-loading-d"></i> Logging in...', delay: 500});
             $http.post(API_DETAILS.baseUrl + 'oauth/token', data, {
                 headers: {
                     "Content-Type": "application/x-www-form-urlencoded",
@@ -62,11 +62,14 @@ carcloudApp.factory('AuthenticationSharedService', function ($rootScope, $http, 
                     $rootScope.account = Session;
                     authService.loginConfirmed(data);
                 });
-                loading.hide();
+                $ionicLoading.hide();
             }).error(function (data, status, headers, config) {
                 $rootScope.authenticationError = true;
                 Session.invalidate();
-                loading.hide();
+                $ionicLoading.hide();
+                if(status == 400) {
+                    alert(data.error_description);
+                }
             });
         },
         refresh: function () {

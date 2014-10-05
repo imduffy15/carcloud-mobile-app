@@ -70,7 +70,6 @@ carcloudApp.run(function ($ionicPlatform, $rootScope, $location, AuthenticationS
     });
 
     if(!Token.get('access_token')) {
-        console.log(Token.get('access_token'));
         $location.path('/login');
     }
 

@@ -1,0 +1,34 @@
+language: android
+android:
+  components:
+  - platform-tools
+  - tools
+  - build-tools-19.0.0
+  - android-19
+before_install:
+- echo "Before install stage"
+install:
+- echo "Install stage"
+- sudo apt-get install -y nodejs npm
+- sudo npm -g install cordova ionic
+- npm install
+- bower install
+- ionic platform add android
+before_script:
+- echo "Before script stage"
+script:
+- echo "Script stage"
+- ionic build android
+after_success:
+- echo "After success stage"
+after_failure:
+- echo "After failure stage"
+after_script:
+- echo "After script stage"
+deploy:
+  provider: releases
+  api_key:
+    secure: O6zuQzSv6husuKQkm3XOF2w8wMtxf6osgsN2xisZoGXJoSdk3n5abM17XI23MTzl57CsNnNnk0aASp2gkCUkMvyrXwmVY1aph61ehr6OunNvAnmXsMUF02nglKhmIzMAq7FMOtR/3f4sd1cCeROTEDpZYovFPNnsFIKgrFU4wwM=
+  file: platforms/android/out/CarCloud-debug-unaligned.apk
+  on:
+    repo: imduffy15/carcloud-mobile-app
