@@ -14,8 +14,8 @@ install:
 - sudo apt-get update -y
 - sudo apt-get install -y nodejs
 - sudo npm -g install cordova ionic
-- npm install
-- bower install
+- sudo npm install
+- sudo bower install
 - ionic platform add android
 before_script:
 - echo "Before script stage"
