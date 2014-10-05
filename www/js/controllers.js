@@ -1,48 +1,20 @@
-angular.module('starter.controllers', [])
+'use strict';
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
-  // Form data for the login modal
-  $scope.loginData = {};
+/* Controllers */
 
-  // Create the login modal that we will use later
-  $ionicModal.fromTemplateUrl('templates/login.html', {
-    scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
+carcloudApp.controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
+});
 
-  // Triggered in the login modal to close it
-  $scope.closeLogin = function() {
-    $scope.modal.hide();
-  };
+carcloudApp.controller('HomeCtrl', function ($scope) {
+});
 
-  // Open the login modal
-  $scope.login = function() {
-    $scope.modal.show();
-  };
+carcloudApp.controller('LoginCtrl', function ($scope, AuthenticationSharedService) {
 
-  // Perform the login action when the user submits the login form
-  $scope.doLogin = function() {
-    console.log('Doing login', $scope.loginData);
+    $scope.login = function(username, password) {
+        AuthenticationSharedService.login({
+            username: username,
+            password: password
+        });
+    }
 
-    // Simulate a login delay. Remove this and replace with your login
-    // code if using a login system
-    $timeout(function() {
-      $scope.closeLogin();
-    }, 1000);
-  };
-})
-
-.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
-})
-
-.controller('PlaylistCtrl', function($scope, $stateParams) {
 });

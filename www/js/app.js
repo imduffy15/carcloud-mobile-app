@@ -1,72 +1,112 @@
-// Ionic Starter App
+'use strict';
 
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers'])
+var httpHeaders;
 
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if(window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
-    if(window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
-  });
-})
+var carcloudApp = angular.module('carcloudApp', ['ionic', 'http-auth-interceptor', 'ngResource', 'carcloudAppUtils']);
 
-.config(function($stateProvider, $urlRouterProvider) {
-  $stateProvider
+carcloudApp.config(function ($httpProvider, $stateProvider, $urlRouterProvider, USER_ROLES) {
+    $stateProvider
+        .state('login', {
+            url: '/login',
+            templateUrl: 'templates/login.html',
+            controller: 'LoginCtrl',
+            data: {
+                authorizedRoles: [USER_ROLES.all]
+            }
+        })
 
-    .state('app', {
-      url: "/app",
-      abstract: true,
-      templateUrl: "templates/menu.html",
-      controller: 'AppCtrl'
-    })
+        .state('app', {
+            url: "/app",
+            abstract: true,
+            templateUrl: "templates/menu.html",
+            controller: 'AppCtrl',
+            data: {
+                authorizedRoles: [USER_ROLES.all]
+            }
+        })
 
-    .state('app.search', {
-      url: "/search",
-      views: {
-        'menuContent' :{
-          templateUrl: "templates/search.html"
-        }
-      }
-    })
+        .state('app.home', {
+            url: "/home",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/home.html",
+                    controller: 'HomeCtrl'
+                }
+            },
+            data: {
+                authorizedRoles: [USER_ROLES.all]
+            }
+        })
 
-    .state('app.browse', {
-      url: "/browse",
-      views: {
-        'menuContent' :{
-          templateUrl: "templates/browse.html"
-        }
-      }
-    })
-    .state('app.playlists', {
-      url: "/playlists",
-      views: {
-        'menuContent' :{
-          templateUrl: "templates/playlists.html",
-          controller: 'PlaylistsCtrl'
-        }
-      }
-    })
+        .state('app.home2', {
+            url: "/home2",
+            views: {
+                'menuContent': {
+                    templateUrl: "templates/home.html",
+                    controller: 'HomeCtrl'
+                }
+            },
+            data: {
+                authorizedRoles: [USER_ROLES.all]
+            }
+        });
 
-    .state('app.single', {
-      url: "/playlists/:playlistId",
-      views: {
-        'menuContent' :{
-          templateUrl: "templates/playlist.html",
-          controller: 'PlaylistCtrl'
-        }
-      }
-    });
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+    $urlRouterProvider.otherwise('app/home');
+
+    httpHeaders = $httpProvider.defaults.headers;
 });
 
+carcloudApp.run(function ($ionicPlatform, $rootScope, $location, AuthenticationSharedService, USER_ROLES, Token) {
+    $ionicPlatform.ready(function () {
+        // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+        // for form inputs)
+        if (window.cordova && window.cordova.plugins.Keyboard) {
+            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+        }
+        if (window.StatusBar) {
+            // org.apache.cordova.statusbar required
+            StatusBar.styleDefault();
+        }
+    });
+
+    if(!Token.get('access_token')) {
+        console.log(Token.get('access_token'));
+        $location.path('/login');
+    }
+
+    $rootScope.$on('$stateChangeStart',
+        function (event, toState, toParams, fromState, fromParams) {
+            $rootScope.isAuthorized = AuthenticationSharedService.isAuthorized;
+
+            if(!Token.get('access_token')) {
+                $location.path('/login');
+            }
+
+            $rootScope.userRoles = USER_ROLES;
+            AuthenticationSharedService.valid(toState.data.authorizedRoles);
+        }
+    );
+    // Call when the the client is confirmed
+    $rootScope.$on('event:auth-loginConfirmed', function (data) {
+        $rootScope.authenticated = true;
+        if ($location.path() === "/login") {
+            $location.path('/').replace();
+        }
+    });
+
+    // Call when the 401 response is returned by the server
+    $rootScope.$on('event:auth-loginRequired', function (rejection) {
+        AuthenticationSharedService.refresh();
+    });
+
+    // Call when the 403 response is returned by the server
+    $rootScope.$on('event:auth-notAuthorized', function (rejection) {
+        $rootScope.errorMessage = 'errors.403';
+        $location.path('/error').replace();
+    });
+
+    // Call when the user logs out
+    $rootScope.$on('event:auth-loginCancelled', function () {
+        $location.path('');
+    });
+});

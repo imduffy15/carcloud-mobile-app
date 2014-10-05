@@ -1,1 +1,9 @@
-/* Empty. Add your own CSS if you like */
+ion-nav-view {
+    background-color: #FFF !important;
+}
+
+.logo {
+    position: relative;
+    margin: 5px auto;
+    text-align: center;
+}
