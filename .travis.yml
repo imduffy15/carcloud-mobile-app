@@ -15,7 +15,6 @@ install:
 - sudo apt-get install -y nodejs imagemagick
 - sudo npm -g install cordova ionic bower gulp cordova-gen
 - sudo npm install
-- bower install
 - mkdir {platforms,plugins}
 - mkdir -p platforms/ios/CarCloud/Resources/icons
 - mkdir -p platforms/ios/CarCloud/Resources/splash
