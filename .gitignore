@@ -33,7 +33,7 @@ node_modules
 
 ### Bower ###
 bower_components
-
+lib
 
 ### Eclipse ###
 *.pydevproject
@@ -142,6 +142,7 @@ release.properties
 ### grunt ###
 # Grunt usually compiles files inside this directory
 dist/
+www/
 
 # Grunt usually preprocesses files such as coffeescript, compass... inside the .tmp directory
 .tmp/

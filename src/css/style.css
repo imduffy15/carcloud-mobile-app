@@ -1,0 +1,41 @@
+ion-nav-view {
+    background-color: #FFF !important;
+}
+
+::-webkit-input-placeholder {
+    color: #bbb;
+}
+
+.scroll-content.padding {
+    padding: 18px;
+}
+
+.item-input {
+    border-width: 0 0 1px 0;
+    margin-bottom: 13px;
+    border-color: #d6d6d6;
+    padding-bottom: 0px;
+}
+
+.item-input .icon {
+    margin-right: 10px;
+    margin-bottom: 2px;
+    font-size: 19px;
+}
+
+.item-input input {
+    font-size: 16px;
+}
+
+.carcloud-logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 25px;
+    width: 155px;
+    height: auto;
+}
+
+#signin-button {
+    margin-top: 23px;
+}
