@@ -10,10 +10,12 @@ carcloudApp.controller('HomeCtrl', function ($scope) {
 
 carcloudApp.controller('LoginCtrl', function ($scope, AuthenticationSharedService) {
 
-    $scope.login = function(username, password) {
+    $scope.form = {};
+
+    $scope.login = function() {
         AuthenticationSharedService.login({
-            username: username,
-            password: password
+            username: $scope.form.username,
+            password: $scope.form.password
         });
     }
 

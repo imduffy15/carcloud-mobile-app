@@ -2,7 +2,7 @@
 
 var httpHeaders;
 
-var carcloudApp = angular.module('carcloudApp', ['ionic', 'http-auth-interceptor', 'ngResource', 'carcloudAppUtils']);
+var carcloudApp = angular.module('carcloudApp', ['ionic', 'ngCordova', 'http-auth-interceptor', 'ngResource', 'carcloudAppUtils']);
 
 carcloudApp.config(function ($httpProvider, $stateProvider, $urlRouterProvider, USER_ROLES) {
     $stateProvider

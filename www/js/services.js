@@ -41,7 +41,7 @@ carcloudApp.factory('Session', function () {
     return this;
 });
 
-carcloudApp.factory('AuthenticationSharedService', function ($rootScope, $http, $ionicLoading, authService, Session, Account, Base64Service, Token, API_DETAILS) {
+carcloudApp.factory('AuthenticationSharedService', function ($rootScope, $http, $ionicLoading, $cordovaDialogs, authService, Session, Account, Base64Service, Token, API_DETAILS) {
     return {
         login: function (param) {
             var data = "username=" + param.username + "&password=" + param.password + "&grant_type=password&scope=read%20write&client_secret=" + API_DETAILS.clientSecret +"&client_id=" + API_DETAILS.clientId;
@@ -68,7 +68,7 @@ carcloudApp.factory('AuthenticationSharedService', function ($rootScope, $http, 
                 Session.invalidate();
                 $ionicLoading.hide();
                 if(status == 400) {
-                    alert(data.error_description);
+                    $cordovaDialogs.alert(data.error_description, 'Failed Login!');
                 }
             });
         },
