@@ -36,11 +36,13 @@ gulp.task('clean:tmp', function () {
 });
 
 gulp.task('copy', ['clean'], function () {
-    return es.merge(gulp.src(yeoman.app + 'i18n/**').
-            pipe(gulp.dest(yeoman.dist + 'i18n/')),
+    return es.merge(
         gulp.src(yeoman.app + '**/*.{woff,svg,ttf,eot}').
             pipe(flatten()).
-            pipe(gulp.dest(yeoman.dist + 'fonts/')));
+            pipe(gulp.dest(yeoman.dist + 'fonts/')),
+        gulp.src(yeoman.app + 'config.xml').
+            pipe(gulp.dest(yeoman.dist))
+    );
 });
 
 gulp.task('images', function () {
