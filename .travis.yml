@@ -5,6 +5,9 @@ android:
   - tools
   - build-tools-19.0.0
   - android-19
+env:
+  global:
+    secure: O6Jl4M2X0K0IKQ8zq/Em1o5POOI4Xl4DG3qTY/QS1/E4jX0+01UpnX0MhEGWoJwqPspIjbcRaNDQCkrQ7oIt+r/hI5zM0bzXJpZ2wEnatZWb//mDoSU5Ge6kbpVk7PrJNsyuU1lkm55m1122Sj1DKuw2N8ZZxsboWiSdY1zoIdQ=
 before_install:
 - echo "Before install stage"
 install:
@@ -28,7 +31,7 @@ script:
 after_success:
 - git config user.name "Travis-CI"
 - git config user.email "travisci@ianduffy.ie"
-- git remote set-url origin https://$gh_token:github.com/imduffy15/carcloud-mobile-app.git
+- git remote set-url origin https://${GH_TOKEN}@github.com/imduffy15/carcloud-mobile-app.git
 - git fetch --tags
 - git tag $TRAVIS_BUILD_NUMBER
 - git push --tags
@@ -44,5 +47,3 @@ deploy:
   on:
     tags: true
     all_branches: true
-gh_token:
-  secure: ENFo5xpPtCcEUBcUiOsgiUaTEMPqh1EoyIenEJ7ljhKK/ZaN3VzPgQ9NZqCMigCzYBwnApmhY02E8bzt+HxHYn70QuJAHfV3TGETuTL4pigoA3vSu2cGClGnNPpVn36qi87A8K55fV8EuJr9w+54lwYxC8tP8Aw9al5REy4r0Ws=
