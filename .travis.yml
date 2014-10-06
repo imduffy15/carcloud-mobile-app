@@ -26,13 +26,16 @@ script:
 - cordova-gen www/img/all.png "#FFF"
 - ionic build android
 after_success:
-- echo "After success stage"
+- git config user.name "Travis-CI"
+- git config user.email "travisci@ianduffy.ie"
+- git remote set-url origin https://$gh_token:github.com/imduffy15/carcloud-mobile-app.git
+- git fetch --tags
+- git tag $TRAVIS_BUILD_NUMBER
+- git push --tags
 after_failure:
 - echo "After failure stage"
 after_script:
 - echo "After script stage"
-before_deploy:
-- git fetch --tags
 deploy:
   provider: releases
   api_key:
@@ -41,3 +44,5 @@ deploy:
   on:
     tags: true
     all_branches: true
+gh_token:
+  secure: ENFo5xpPtCcEUBcUiOsgiUaTEMPqh1EoyIenEJ7ljhKK/ZaN3VzPgQ9NZqCMigCzYBwnApmhY02E8bzt+HxHYn70QuJAHfV3TGETuTL4pigoA3vSu2cGClGnNPpVn36qi87A8K55fV8EuJr9w+54lwYxC8tP8Aw9al5REy4r0Ws=
