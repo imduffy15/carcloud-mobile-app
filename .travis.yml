@@ -24,7 +24,7 @@ before_script:
 - echo "Before script stage"
 script:
 - echo "Script stage"
-- cordova-gen 
+- cordova-gen www/img/all.png "#FFF"
 - ionic build android
 after_success:
 - echo "After success stage"
