@@ -100,8 +100,8 @@ gulp.task('usemin', ['images', 'styles'], function () {
                 minifyHtml({empty: true, conditionals: true})
             ],
             js: [
-                ngAnnotate(),
-                uglify(),
+                //ngAnnotate(),
+                //uglify(),
                 'concat',
                 rev()
             ]
