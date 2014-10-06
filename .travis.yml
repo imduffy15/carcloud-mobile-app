@@ -18,14 +18,15 @@ install:
 - sudo apt-get install -y nodejs imagemagick
 - sudo npm -g install cordova ionic bower gulp cordova-gen
 - sudo npm install
-- mkdir {platforms,plugins}
+- bower install
 - mkdir -p platforms/ios/CarCloud/Resources/icons
 - mkdir -p platforms/ios/CarCloud/Resources/splash
-- ionic platform add android
 before_script:
 - echo "Before script stage"
 script:
 - echo "Script stage"
+- gulp
+- ionic platform add android
 - cordova-gen www/img/all.png "#FFF"
 - ionic build android
 after_success:
