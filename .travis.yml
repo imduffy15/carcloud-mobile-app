@@ -28,6 +28,10 @@ script:
 - gulp
 - ionic platform add android
 - cordova-gen www/img/all.png "#FFF"
+- cordova plugin add org.apache.cordova.splashscreen
+- cordova plugin add org.apache.cordova.device
+- cordova plugin add org.apache.cordova.dialogs
+- cordova plugin add https://github.com/driftyco/ionic-plugins-keyboard.git
 - ionic build android
 after_success:
 - bash ./.push-release.sh
