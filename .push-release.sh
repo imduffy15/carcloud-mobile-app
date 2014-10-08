@@ -1,7 +1,7 @@
 #!/bin/bash
 
-git --global config user.name "Travis-CI"
-git --global config user.email "travisci@ianduffy.ie"
+git config --global user.name "Travis-CI"
+git config --global user.email "travisci@ianduffy.ie"
 git remote set-url origin https://${GH_TOKEN}@github.com/imduffy15/carcloud-mobile-app.git
 git fetch --tags
 
