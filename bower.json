@@ -7,6 +7,6 @@
     "angular-resource": "~1.2.26"
   },
   "resolutions": {
-    "angular": "1.2.26"
+    "angular": "1.2.27"
   }
 }
