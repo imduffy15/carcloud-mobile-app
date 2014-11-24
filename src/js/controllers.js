@@ -20,3 +20,8 @@ carcloudApp.controller('LoginCtrl', function ($scope, AuthenticationSharedServic
     }
 
 });
+
+carcloudApp.controller('LogoutController', function ($location, AuthenticationSharedService) {
+    AuthenticationSharedService.logout();
+    $location.path('/login');
+});

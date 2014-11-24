@@ -15,6 +15,14 @@ carcloudApp.config(function ($httpProvider, $stateProvider, $urlRouterProvider, 
             }
         })
 
+        .state('logout', {
+            url: '/logout',
+            controller: 'LogoutController',
+            data: {
+                authorizedRoles: [USER_ROLES.all]
+            }
+        })
+
         .state('app', {
             url: "/app",
             abstract: true,

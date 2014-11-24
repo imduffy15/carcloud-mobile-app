@@ -24,15 +24,13 @@ carcloudApp.factory('Password', function ($resource, API_DETAILS) {
 });
 
 carcloudApp.factory('Session', function () {
-    this.create = function (login, firstName, lastName, email, userRoles) {
-        this.login = login;
+    this.create = function (firstName, lastName, email, userRoles) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.userRoles = userRoles;
     };
     this.invalidate = function () {
-        this.login = null;
         this.firstName = null;
         this.lastName = null;
         this.email = null;
@@ -41,7 +39,7 @@ carcloudApp.factory('Session', function () {
     return this;
 });
 
-carcloudApp.factory('AuthenticationSharedService', function ($rootScope, $http, $ionicLoading, $cordovaDialogs, authService, Session, Account, Base64Service, Token, API_DETAILS) {
+carcloudApp.factory('AuthenticationSharedService', function ($rootScope, $http, $ionicLoading, $ionicViewService, $cordovaDialogs, authService, Session, Account, Base64Service, Token, API_DETAILS) {
     return {
         login: function (param) {
             var data = "username=" + param.username + "&password=" + param.password + "&grant_type=password&scope=read%20write&client_secret=" + API_DETAILS.clientSecret + "&client_id=" + API_DETAILS.clientId;
@@ -58,10 +56,11 @@ carcloudApp.factory('AuthenticationSharedService', function ($rootScope, $http, 
                 Token.set(data);
 
                 Account.get(function (data) {
-                    Session.create(data.login, data.firstName, data.lastName, data.email, data.roles);
+                    Session.create(data.firstName, data.lastName, data.email, data.roles);
                     $rootScope.account = Session;
                     authService.loginConfirmed(data);
                 });
+                $ionicViewService.clearHistory();
                 $ionicLoading.hide();
             }).error(function (data, status, headers, config) {
                 $rootScope.authenticationError = true;
@@ -86,7 +85,7 @@ carcloudApp.factory('AuthenticationSharedService', function ($rootScope, $http, 
                 Token.set(data);
 
                 Account.get(function (data) {
-                    Session.create(data.login, data.firstName, data.lastName, data.email, data.roles);
+                    Session.create(data.firstName, data.lastName, data.email, data.roles);
                     $rootScope.account = Session;
                     authService.loginConfirmed(data, function (config) {
                         config.headers['Authorization'] = 'Bearer ' + Token.get('access_token');
@@ -104,13 +103,13 @@ carcloudApp.factory('AuthenticationSharedService', function ($rootScope, $http, 
             $http.get(API_DETAILS.baseUrl + 'app/rest/account', {
                 ignoreAuthModule: 'ignoreAuthModule'
             }).success(function (data, status, headers, config) {
-                if (!Session.login || Token.get('access_token') != undefined) {
+                if (!Session.email || Token.get('access_token') != undefined) {
                     if (Token.get('access_token') == undefined || Token.expired()) {
                         $rootScope.authenticated = false;
                         return;
                     }
                     Account.get(function (data) {
-                        Session.create(data.login, data.firstName, data.lastName, data.email, data.roles);
+                        Session.create(data.firstName, data.lastName, data.email, data.roles);
                         $rootScope.account = Session;
 
                         if (!$rootScope.isAuthorized(authorizedRoles)) {
@@ -122,7 +121,7 @@ carcloudApp.factory('AuthenticationSharedService', function ($rootScope, $http, 
                         $rootScope.authenticated = true;
                     });
                 }
-                $rootScope.authenticated = !!Session.login;
+                $rootScope.authenticated = !!Session.email;
             }).error(function (data, status, headers, config) {
                 $rootScope.authenticated = false;
             });
@@ -138,7 +137,7 @@ carcloudApp.factory('AuthenticationSharedService', function ($rootScope, $http, 
 
             var isAuthorized = false;
             angular.forEach(authorizedRoles, function (authorizedRole) {
-                var authorized = (!!Session.login &&
+                var authorized = (!!Session.email &&
                     Session.userRoles.indexOf(authorizedRole) !== -1);
 
                 if (authorized || authorizedRole == '*') {
@@ -157,6 +156,7 @@ carcloudApp.factory('AuthenticationSharedService', function ($rootScope, $http, 
             $http.get('app/logout');
             Session.invalidate();
             delete httpHeaders.common['Authorization'];
+            $ionicViewService.clearHistory();
             authService.loginCancelled();
         }
     };
