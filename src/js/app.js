@@ -64,7 +64,7 @@ carcloudApp.config(function ($httpProvider, $stateProvider, $urlRouterProvider, 
     httpHeaders = $httpProvider.defaults.headers;
 });
 
-carcloudApp.run(function ($ionicPlatform, $rootScope, $location, AuthenticationSharedService, USER_ROLES, Token) {
+carcloudApp.run(function ($ionicPlatform, $ionicPopup, $rootScope, $location, AuthenticationSharedService, USER_ROLES, Token) {
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
         // for form inputs)
@@ -76,6 +76,19 @@ carcloudApp.run(function ($ionicPlatform, $rootScope, $location, AuthenticationS
             StatusBar.styleDefault();
         }
     });
+    
+      $ionicPlatform.onHardwareBackButton(function () {
+      if(true) { // your check here
+          $ionicPopup.confirm({
+            title: 'System warning',
+            template: 'are you sure you want to exit?'
+          }).then(function(res){
+            if( res ){
+              navigator.app.exitApp();
+            }
+          })
+      }
+  });
 
     if (!Token.get('access_token')) {
         $location.path('/login');
