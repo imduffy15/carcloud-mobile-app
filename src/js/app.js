@@ -2,7 +2,7 @@
 
 var httpHeaders;
 
-var carcloudApp = angular.module('carcloudApp', ['ionic', 'ngCordova', 'http-auth-interceptor', 'ngResource', 'carcloudAppUtils']);
+var carcloudApp = angular.module('carcloudApp', ['ionic', 'ngCordova', 'http-auth-interceptor', 'ngResource', 'carcloudAppUtils', 'ui.gravatar']);
 
 carcloudApp.config(function ($httpProvider, $stateProvider, $urlRouterProvider, USER_ROLES) {
 	$stateProvider
@@ -46,11 +46,11 @@ carcloudApp.config(function ($httpProvider, $stateProvider, $urlRouterProvider, 
 				}
 			})
 
-			.state('app.home2', {
-				url: "/home2",
+			.state('app.account', {
+				url: "/account",
 				views: {
 					'menuContent': {
-						templateUrl: "templates/home.html",
+						templateUrl: "templates/account.html",
 						controller: 'HomeCtrl'
 					}
 				},

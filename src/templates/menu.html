@@ -1,10 +1,6 @@
 <ion-side-menus>
 
     <ion-pane ion-side-menu-content>
-        <ion-nav-bar class="bar-stable nav-title-slide-ios7">
-            <ion-nav-back-button class="button-clear"><i class="icon ion-ios7-arrow-back"></i> Back
-            </ion-nav-back-button>
-        </ion-nav-bar>
         <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
     </ion-pane>
 
@@ -14,10 +10,12 @@
         </header>
         <ion-content class="has-header">
             <ion-list>
+				<ion-item nav-clear menu-close href="#/app/account" class="item item-avatar">
+					<img gravatar-src="'admin@carcloud.ianduffy.ie'">
+					<h2>Ian Duffy</h2>
+					<p>admin@carcloud.ianduffy.ie</p>
+				</ion-item>
                 <ion-item nav-clear menu-close href="#/app/home">
-                    Home
-                </ion-item>
-                <ion-item nav-clear menu-close href="#/app/home2">
                     Home
                 </ion-item>
                 <ion-item nav-clear menu-close href="#/logout">
