@@ -37,8 +37,21 @@ carcloudApp.config(function ($httpProvider, $stateProvider, $urlRouterProvider, 
 				url: "/home",
 				views: {
 					'menuContent': {
-						templateUrl: "templates/home.html",
-						controller: 'HomeCtrl'
+						templateUrl: "templates/devices.html",
+						controller: 'DeviceCtrl'
+					}
+				},
+				data: {
+					authorizedRoles: [USER_ROLES.all]
+				}
+			})
+
+			.state('app.device', {
+				url: "/device/:id",
+				views: {
+					'menuContent': {
+						templateUrl: "templates/device.html",
+						controller: 'DeviceSingleCtrl'
 					}
 				},
 				data: {
@@ -51,7 +64,7 @@ carcloudApp.config(function ($httpProvider, $stateProvider, $urlRouterProvider, 
 				views: {
 					'menuContent': {
 						templateUrl: "templates/account.html",
-						controller: 'HomeCtrl'
+						controller: 'AccountCtrl'
 					}
 				},
 				data: {

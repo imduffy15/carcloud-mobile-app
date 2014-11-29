@@ -5,8 +5,15 @@
 carcloudApp.controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
 });
 
-carcloudApp.controller('HomeCtrl', function ($scope) {
+carcloudApp.controller('DeviceCtrl', function ($scope) {
 });
+
+carcloudApp.controller('DeviceSingleCtrl', function ($scope) {
+});
+
+carcloudApp.controller('AccountCtrl', function ($scope) {
+});
+
 
 carcloudApp.controller('LoginCtrl', function ($scope, AuthenticationSharedService) {
 
