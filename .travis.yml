@@ -43,7 +43,7 @@ script:
 - ionic build --release android
 after_success:
 - bash ./.push-release.sh
-- jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore carcloud-release-key.keystore platforms/android/ant-build/CordovaApp-release-unsigned.apk carcloud -storepass $STOREPASS
+- jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore carcloud-release-key.keystore platforms/android/ant-build/CarCloud-release-unsigned.apk carcloud -storepass $STOREPASS
 - zipalign -v 4 platforms/android/ant-build/CarCloud-release-unsigned.apk platforms/android/ant-build/CarCloud.apk
 after_failure:
 - echo "After failure stage"
