@@ -25,6 +25,7 @@ script:
 - echo "Script stage"
 - gulp
 - ionic platform add android
+- sed -i -e 's/CordovaApp/CarCloud/g' platforms/android/AndroidManifest.xml
 - cordova plugin add org.apache.cordova.splashscreen
 - cordova plugin add org.apache.cordova.device
 - cordova plugin add org.apache.cordova.dialogs
@@ -44,7 +45,7 @@ deploy:
   provider: releases
   api_key:
     secure: O6zuQzSv6husuKQkm3XOF2w8wMtxf6osgsN2xisZoGXJoSdk3n5abM17XI23MTzl57CsNnNnk0aASp2gkCUkMvyrXwmVY1aph61ehr6OunNvAnmXsMUF02nglKhmIzMAq7FMOtR/3f4sd1cCeROTEDpZYovFPNnsFIKgrFU4wwM=
-  file: platforms/android/ant-build/CordovaApp-debug.apk
+  file: platforms/android/ant-build/CarCloud-debug.apk
   on:
     tags: true
     all_branches: true
