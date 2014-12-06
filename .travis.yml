@@ -23,9 +23,12 @@ before_script:
 - echo "Before script stage"
 script:
 - echo "Script stage"
+- sed -i -e 's/\$VERSIONCODE/$TRAVIS_BUILD_NUMBER/g' config.xml
 - gulp
 - ionic platform add android
 - sed -i -e 's/CordovaApp/CarCloud/g' platforms/android/AndroidManifest.xml
+- mv platforms/android/src/ie/ianduffy/carcloud/CordovaApp.java platforms/android/src/ie/ianduffy/carcloud/CarCloud.java
+- sed -i -e 's/CordovaApp/CarCloud/g' platforms/android/src/ie/ianduffy/carcloud/CarCloud.java
 - cordova plugin add org.apache.cordova.splashscreen
 - cordova plugin add org.apache.cordova.device
 - cordova plugin add org.apache.cordova.dialogs
