@@ -37,7 +37,7 @@ script:
 - mkdir -p platforms/ios/CarCloud/Resources/icons
 - mkdir -p platforms/ios/CarCloud/Resources/splash
 - cordova-gen www/img/all.png "#FFF"
-- ionic build android
+- ionic build --release android
 after_success:
 - bash ./.push-release.sh
 after_failure:
@@ -48,7 +48,7 @@ deploy:
   provider: releases
   api_key:
     secure: O6zuQzSv6husuKQkm3XOF2w8wMtxf6osgsN2xisZoGXJoSdk3n5abM17XI23MTzl57CsNnNnk0aASp2gkCUkMvyrXwmVY1aph61ehr6OunNvAnmXsMUF02nglKhmIzMAq7FMOtR/3f4sd1cCeROTEDpZYovFPNnsFIKgrFU4wwM=
-  file: platforms/android/ant-build/CarCloud-debug.apk
+  file: platforms/android/ant-build/CarCloud-release-unsigned.apk
   on:
     tags: true
     all_branches: true
