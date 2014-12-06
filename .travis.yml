@@ -7,7 +7,7 @@ android:
   - android-19
 install:
 - which android
-- tree /usr/local/android-sdk/
+- find "/usr/local/android-sdk/" "zipalign"
 - ls -lah /usr/local/android-sdk/
 - ls -lah /usr/bin
 - ls -lah /usr/local/bin
