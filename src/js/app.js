@@ -4,7 +4,7 @@ var httpHeaders;
 
 var carcloudApp = angular.module('carcloudApp', ['ionic', 'ngCordova', 'http-auth-interceptor', 'ngResource', 'carcloudAppUtils', 'ui.gravatar']);
 
-carcloudApp.config(function ($httpProvider, $stateProvider, $urlRouterProvider, USER_ROLES) {
+carcloudApp.config(function ($httpProvider, $stateProvider, $urlRouterProvider, USER_ROLES, gravatarServiceProvider) {
 	$stateProvider
 			.state('login', {
 				url: '/login',
@@ -73,6 +73,8 @@ carcloudApp.config(function ($httpProvider, $stateProvider, $urlRouterProvider, 
 			});
 
 	$urlRouterProvider.otherwise('app/home');
+
+	gravatarServiceProvider.secure = true;
 
 	httpHeaders = $httpProvider.defaults.headers;
 });
