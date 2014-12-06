@@ -7,5 +7,7 @@ android:
   - android-19
 install:
 - which android
+- tree /usr/local/android-sdk/
+- ls -lah /usr/local/android-sdk/
 - ls -lah /usr/bin
 - ls -lah /usr/local/bin
