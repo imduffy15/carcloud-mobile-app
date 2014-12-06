@@ -27,6 +27,7 @@ before_script:
 script:
 - echo "Script stage"
 - sed -i -e "s/\$VERSIONCODE/$TRAVIS_BUILD_NUMBER/g" config.xml
+- sed -i -e "s/\$VERSIONCODE/$TRAVIS_BUILD_NUMBER/g" package.json
 - gulp
 - ionic platform add android
 - sed -i -e 's/CordovaApp/CarCloud/g' platforms/android/AndroidManifest.xml

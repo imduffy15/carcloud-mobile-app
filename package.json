@@ -1,6 +1,6 @@
 {
     "name": "CarCloud",
-    "version": "0.1",
+    "version": "0.1.$VERSIONCODE",
     "description": "Tracking, Alerting and more.",
     "devDependencies": {
         "gulp": "3.6.2",
