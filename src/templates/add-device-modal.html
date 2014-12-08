@@ -1,0 +1,25 @@
+<div class="modal">
+
+    <ion-header-bar align-title="center" class="bar-positive">
+        <button class="button button-clear" ng-click="closeAddDeviceModal()">
+            <i class="ion-ios7-arrow-back"></i>
+        </button>
+        <h1 class="title">Add Device</h1>
+    </ion-header-bar>
+
+    <ion-content class="has-header" padding="true" scroll="false">
+        <div class="list">
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">ID</span>
+                <input type="text">
+            </label>
+            <label class="item item-input item-stacked-label">
+                <span class="input-label">Description</span>
+                <input type="text">
+            </label>
+        </div>
+
+        <button class="button button-full button-positive" ng-click="closeAddDeviceModal()">Add</button>
+        <button class="button button-full button-dark" ng-click="closeAddDeviceModal()">Cancel</button>
+    </ion-content>
+</div>

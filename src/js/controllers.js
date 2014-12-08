@@ -5,7 +5,27 @@
 carcloudApp.controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
 });
 
-carcloudApp.controller('DeviceCtrl', function ($scope) {
+carcloudApp.controller('DeviceCtrl', function ($scope, $ionicModal) {
+
+    $ionicModal.fromTemplateUrl('templates/add-device-modal.html', {
+        scope: $scope,
+        animation: 'slide-left-right'
+    }).then(function(modal) {
+        $scope.modal = modal
+    });
+
+    $scope.openAddDeviceModal = function() {
+        $scope.modal.show()
+    };
+
+    $scope.closeAddDeviceModal = function() {
+        $scope.modal.hide();
+    };
+
+    $scope.$on('$destroy', function() {
+        $scope.modal.remove();
+    });
+
 });
 
 carcloudApp.controller('DeviceSingleCtrl', function ($scope) {
