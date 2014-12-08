@@ -8,14 +8,12 @@
     </ion-header-bar>
 
     <ion-content class="has-header" padding="true" scroll="false">
-        <div class="list">
-            <label class="item item-input item-stacked-label">
-                <span class="input-label">ID</span>
-                <input type="text">
+        <div class="ion-list">
+            <label class="item item-input">
+                <input ng-model="form.username" type="text" placeholder="ID">
             </label>
-            <label class="item item-input item-stacked-label">
-                <span class="input-label">Description</span>
-                <input type="text">
+            <label class="item item-input">
+                <input ng-model="form.password" type="text" placeholder="Description">
             </label>
         </div>
 
