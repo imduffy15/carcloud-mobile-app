@@ -46,7 +46,8 @@ script:
 after_success:
 - bash ./.push-release.sh
 - jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore carcloud-release-key.keystore platforms/android/ant-build/CarCloud-release-unsigned.apk carcloud -storepass $STOREPASS
-- /usr/local/android-sdk/build-tools/21.0.2/zipalign -v 4 platforms/android/ant-build/CarCloud-release-unsigned.apk platforms/android/ant-build/CarCloud.apk
+- export PATH=$(find /usr/local/android-sdk/ -name zipalign -type f| head -1 | sed -e 's/\/zipalign//g'):$PATH
+- zipalign -v 4 platforms/android/ant-build/CarCloud-release-unsigned.apk platforms/android/ant-build/CarCloud.apk
 after_failure:
 - echo "After failure stage"
 after_script:
