@@ -19,6 +19,7 @@ install:
 - sed -i -e "s/\$VERSIONCODE/$TRAVIS_BUILD_NUMBER/g" config.xml
 - sed -i -e "s/\$VERSIONCODE/$TRAVIS_BUILD_NUMBER/g" package.json
 - npm install
+- export PATH=$(npm bin):$PATH
 - bower install
 before_script:
 - echo "Before script stage"
