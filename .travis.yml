@@ -5,6 +5,7 @@ android:
   - tools
   - build-tools-19.0.0
   - android-19
+sudo: false
 env:
   global:
   - secure: O6Jl4M2X0K0IKQ8zq/Em1o5POOI4Xl4DG3qTY/QS1/E4jX0+01UpnX0MhEGWoJwqPspIjbcRaNDQCkrQ7oIt+r/hI5zM0bzXJpZ2wEnatZWb//mDoSU5Ge6kbpVk7PrJNsyuU1lkm55m1122Sj1DKuw2N8ZZxsboWiSdY1zoIdQ=
@@ -17,12 +18,7 @@ install:
 - echo "Install stage"
 - sed -i -e "s/\$VERSIONCODE/$TRAVIS_BUILD_NUMBER/g" config.xml
 - sed -i -e "s/\$VERSIONCODE/$TRAVIS_BUILD_NUMBER/g" package.json
-- sudo apt-get install -y python-software-properties
-- sudo add-apt-repository -y ppa:chris-lea/node.js
-- sudo apt-get update -y
-- sudo apt-get install -y nodejs imagemagick
-- sudo npm -g install cordova ionic bower gulp cordova-gen
-- sudo npm install
+- npm install
 - bower install
 before_script:
 - echo "Before script stage"
