@@ -1,29 +1,31 @@
 <ion-view title="CarCloud">
-	<ion-nav-bar class="bar-dark">
-		<ion-nav-buttons side="left">
-			<button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
-		</ion-nav-buttons>
-	</ion-nav-bar>
-	<ion-content class="has-header">
-		<ion-list show-delete="false">
-			<ion-item href="#/app/device/356363050331521">
-				<h2>Dacia Sandero</h2>
-				<p>356363050331521</p>
-				<ion-option-button class="item-energized">
-					<button class="ion-edit button icon button-icon"></button>
-				</ion-option-button>
-				<ion-option-button class="item-delete">
-					<button class="ion-minus-circled button icon button-icon"></button>
-				</ion-option-button>
-			</ion-item>
-		</ion-list>
-	</ion-content>
+    <ion-nav-bar class="bar-dark">
+        <ion-nav-buttons side="left">
+            <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content class="has-header">
+        <ion-list show-delete="false">
+            <ion-item ng-repeat="device in devices" href="#/app/device/{{device.id}}">
+                <h2>{{device.description}}</h2>
 
-	<div class="float-button float-button-positive">
+                <p>{{device.id}}</p>
+                <ion-option-button class="item-energized" ng-click="edit(device.id)">
+                    <button class="ion-edit button icon button-icon"></button>
+                </ion-option-button>
+
+                <ion-option-button class="item-delete" ng-click="delete(device.id)">
+                    <button class="ion-minus-circled button icon button-icon"></button>
+                </ion-option-button>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+
+    <div class="float-button float-button-positive">
 	  <span class="height-fix">
 	    <a class="content" ng-click="openAddDeviceModal()">
-	      <i class="ion-plus-round"> </i>
-	    </a>
+            <i class="ion-plus-round"> </i>
+        </a>
 	  </span>
-	</div>
+    </div>
 </ion-view>

@@ -1,22 +1,22 @@
 <div class="modal">
 
     <ion-header-bar align-title="center" class="bar-positive">
-        <button class="button button-clear" ng-click="closeAddDeviceModal()">
+        <button class="button button-clear" ng-click="closeEditDeviceModal()">
             <i class="ion-ios7-arrow-back"></i>
         </button>
-        <h1 class="title">Create a Device</h1>
+        <h1 class="title">Edit a Device</h1>
     </ion-header-bar>
 
     <ion-content class="has-header" padding="true" scroll="false">
 
         <form name="form" role="form" novalidate
               class="ng-scope ng-invalid ng-invalid-required ng-dirty ng-valid-minlength"
-              ng-submit="create(this)">
+              ng-submit="update(this)">
 
 
             <div class="ion-list">
                 <label class="item item-input">
-                    <input name="id" ng-model="device.id" type="number" placeholder="ID" required>
+                    <input name="id" ng-model="device.id" type="number" placeholder="ID" disabled>
                 </label>
 
                 <div class="error" ng-cloak ng-show="form.id.$dirty && form.id.$invalid">
@@ -38,7 +38,7 @@
 
             </div>
 
-            <button type="button" class="button button-full button-dark" ng-click="closeAddDeviceModal()">
+            <button type="button" class="button button-full button-dark" ng-click="closeEditDeviceModal()">
                 <span class="ion-android-cancel"></span> Cancel
             </button>
 

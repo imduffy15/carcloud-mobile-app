@@ -3,21 +3,29 @@
 /* Services */
 
 carcloudApp.factory('Register', function ($resource, API_DETAILS) {
-	return $resource(API_DETAILS.baseUrl + 'app/rest/register', {}, {});
+    return $resource(API_DETAILS.baseUrl + 'app/rest/register', {}, {});
 });
 
 carcloudApp.factory('Activate', function ($resource, API_DETAILS) {
-	return $resource(API_DETAILS.baseUrl + 'app/rest/activate', {}, {
-		'get': {method: 'GET', params: {}, isArray: false}
-	});
+    return $resource(API_DETAILS.baseUrl + 'app/rest/activate', {}, {
+        'get': {method: 'GET', params: {}, isArray: false}
+    });
 });
 
 carcloudApp.factory('Account', function ($resource, API_DETAILS) {
-	return $resource(API_DETAILS.baseUrl + 'app/rest/account', {}, {});
+    return $resource(API_DETAILS.baseUrl + 'app/rest/account', {}, {});
 });
 
 carcloudApp.factory('Password', function ($resource, API_DETAILS) {
-	return $resource(API_DETAILS.baseUrl + 'app/rest/account/change_password', {}, {});
+    return $resource(API_DETAILS.baseUrl + 'app/rest/account/change_password', {}, {});
+});
+
+carcloudApp.factory('Device', function ($resource, API_DETAILS) {
+    return $resource(API_DETAILS.baseUrl + 'app/rest/devices/:id', {}, {
+        'query': {method: 'GET', isArray: true},
+        'get': {method: 'GET'},
+        'update': {method: 'PUT'}
+    });
 });
 
 carcloudApp.factory('Session', function () {
@@ -26,7 +34,7 @@ carcloudApp.factory('Session', function () {
         this.lastName = lastName;
         this.email = email;
         this.authorities = [];
-        angular.forEach(authorities, function(authority) {
+        angular.forEach(authorities, function (authority) {
             this.authorities.push(authority['name']);
         }, this);
     };
@@ -40,7 +48,7 @@ carcloudApp.factory('Session', function () {
 });
 
 carcloudApp.factory('AuthenticationSharedService', function ($rootScope, $http, $ionicLoading, $ionicViewService, $cordovaDialogs, authService, Session, Account, Base64Service, Token, API_DETAILS) {
-	return {
+    return {
         login: function (param) {
             var data = "username=" + param.username + "&password=" + param.password + "&grant_type=password&scope=read%20write&client_secret=Echoong7zooNga3tvohy6Xaeoon9Aem3ange8Iga5ooDa1ahb8LaS2&client_id=carcloudapp";
             $http.post(API_DETAILS.baseUrl + '/oauth/token', data, {
@@ -138,17 +146,17 @@ carcloudApp.factory('AuthenticationSharedService', function ($rootScope, $http, 
 
             return isAuthorized;
         },
-		logout: function () {
-			$rootScope.authenticationError = false;
-			$rootScope.authenticated = false;
-			$rootScope.account = null;
-			Token.remove();
+        logout: function () {
+            $rootScope.authenticationError = false;
+            $rootScope.authenticated = false;
+            $rootScope.account = null;
+            Token.remove();
 
-			$http.get('app/logout');
-			Session.invalidate();
-			delete httpHeaders.common['Authorization'];
-			$ionicViewService.clearHistory();
-			authService.loginCancelled();
-		}
-	};
+            $http.get('app/logout');
+            Session.invalidate();
+            delete httpHeaders.common['Authorization'];
+            $ionicViewService.clearHistory();
+            authService.loginCancelled();
+        }
+    };
 });
