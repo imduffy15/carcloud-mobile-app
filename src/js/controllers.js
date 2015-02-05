@@ -78,7 +78,26 @@ carcloudApp.controller('DeviceCtrl', function ($scope, $ionicModal, Device, devi
 
 });
 
-carcloudApp.controller('DeviceSingleCtrl', function ($scope) {
+carcloudApp.controller('DeviceSingleCtrl', function ($scope, $ionicPopover) {
+
+    $ionicPopover.fromTemplateUrl('templates/device-popover.html', {
+        scope: $scope
+    }).then(function(popover) {
+        $scope.popover = popover;
+    });
+
+    $scope.openPopover = function($event) {
+        $scope.popover.show($event);
+    };
+    $scope.closePopover = function() {
+        $scope.popover.hide();
+    };
+
+    $scope.$on('$destroy', function() {
+        $scope.popover.remove();
+    });
+
+
 });
 
 carcloudApp.controller('AccountCtrl', function ($scope, $rootScope, $cordovaToast, Account, Session) {

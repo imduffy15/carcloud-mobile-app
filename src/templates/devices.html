@@ -12,8 +12,12 @@
                 <h2>{{device.description}}</h2>
 
                 <p>{{device.id}}</p>
-                <ion-option-button class="item-energized" ng-click="edit(device.id)">
-                    <button class="ion-edit button icon button-icon"></button>
+                <ion-option-button ng-click="edit(device.id)">
+                    <button class="ion-edit button energized icon button-icon"></button>
+                </ion-option-button>
+
+                <ion-option-button class="balanced" ng-click="share(device.id)">
+                    <button class="ion-share calm button icon button-icon"></button>
                 </ion-option-button>
 
                 <ion-option-button class="item-delete" ng-click="delete(device.id)">
