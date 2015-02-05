@@ -84,3 +84,16 @@ ion-nav-view {
     right: 0;
     width: 100%;
 }
+
+.item-input {
+     padding: 6px 0 0 0;
+}
+
+.item-input input {
+    padding-left: 24px;
+}
+
+.force-display-inline-block {
+    display: inline-block !important;
+    opacity: 0.8 !important;
+}

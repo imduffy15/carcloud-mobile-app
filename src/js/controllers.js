@@ -53,6 +53,13 @@ carcloudApp.controller('DeviceCtrl', function ($scope, $ionicModal, Device, devi
         $scope.addDeviceModal.hide();
     };
 
+    $scope.update = function(form) {
+        Device.update(form.device, function() {
+           $scope.devices[form.device.id] = form.device;
+            $scope.closeEditDeviceModal();
+        });
+    };
+
     $scope.edit = function(id) {
         $scope.device = $scope.devices[id];
         $scope.openEditDeviceModal();
