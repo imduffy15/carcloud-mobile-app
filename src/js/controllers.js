@@ -94,14 +94,14 @@ carcloudApp.controller('AccountCtrl', function ($scope, $rootScope, $cordovaToas
                         data.lastName,
                         data.email
                     );
-                    $cordovaToast.show('Account Updated', 'short', 'bottom');
+                    $cordovaToast.show('Account updated', 'short', 'center');
                 });
         });
     }
 
 });
 
-carcloudApp.controller('PasswordCtrl', function($scope, Account) {
+carcloudApp.controller('PasswordCtrl', function($scope, $cordovaToast, Account) {
     $scope.account = Account.get();
 
     $scope.changePassword = function(form) {
@@ -109,7 +109,7 @@ carcloudApp.controller('PasswordCtrl', function($scope, Account) {
             'password': form.password,
             'version': $scope.account.version
         }, function() {
-            $cordovaToast.show('Password Updated', 'short', 'bottom');
+            $cordovaToast.show('Password updated', 'short', 'center')
         });
     }
 
