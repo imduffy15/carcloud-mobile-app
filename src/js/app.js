@@ -11,16 +11,16 @@ carcloudApp
                 url: '/login',
                 templateUrl: 'templates/login.html',
                 controller: 'LoginCtrl',
-                data: {
-                    authorizedRoles: [USER_ROLES.all]
+                access: {
+                    authorities: [USER_ROLES.all]
                 }
             })
 
             .state('logout', {
                 url: '/logout',
                 controller: 'LogoutController',
-                data: {
-                    authorizedRoles: [USER_ROLES.all]
+                access: {
+                    authorities: [USER_ROLES.all]
                 }
             })
 
@@ -29,8 +29,8 @@ carcloudApp
                 abstract: true,
                 templateUrl: "templates/menu.html",
                 controller: 'AppCtrl',
-                data: {
-                    authorizedRoles: [USER_ROLES.all]
+                access: {
+                    authorities: [USER_ROLES.user]
                 }
             })
 
@@ -57,8 +57,8 @@ carcloudApp
                         return deferred.promise;
                     }
                 },
-                data: {
-                    authorizedRoles: [USER_ROLES.all]
+                access: {
+                    authorities: [USER_ROLES.user]
                 }
             })
 
@@ -70,8 +70,8 @@ carcloudApp
                         controller: 'DeviceSingleCtrl'
                     }
                 },
-                data: {
-                    authorizedRoles: [USER_ROLES.all]
+                access: {
+                    authorities: [USER_ROLES.user]
                 }
             })
 
@@ -83,8 +83,8 @@ carcloudApp
                         controller: 'AccountCtrl'
                     }
                 },
-                data: {
-                    authorizedRoles: [USER_ROLES.all]
+                access: {
+                    authorities: [USER_ROLES.user]
                 }
             });
 
@@ -115,15 +115,21 @@ carcloudApp
 
         $rootScope.userRoles = USER_ROLES;
 
-        $rootScope.$on('$routeChangeStart', function (event, next) {
+        $rootScope.$on('$stateChangeStart', function (event, next) {
+
+            console.log("route change");
+
             $rootScope.authenticated = !!Session.get();
             $rootScope.account = Session.get();
 
             $rootScope.isAuthorized = AuthenticationService.isAuthorized;
 
             if (Token.get()) {
+                console.log("lalala");
                 httpHeaders.common['Authorization'] = 'Bearer ' + Token.get().accessToken;
             }
+
+            console.log(next);
 
             AuthenticationService.valid(next.access.authorities);
         });
