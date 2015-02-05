@@ -32,7 +32,7 @@ carcloudApp.controller('DeviceCtrl', function ($scope, $ionicModal, Device, devi
         $scope.addDeviceModal.hide();
     };
 
-    $scope.openEditDeviceModal = function() {
+    $scope.openEditDeviceModal = function () {
         $scope.editDeviceModal.show();
     };
 
@@ -53,20 +53,20 @@ carcloudApp.controller('DeviceCtrl', function ($scope, $ionicModal, Device, devi
         $scope.addDeviceModal.hide();
     };
 
-    $scope.update = function(form) {
-        Device.update(form.device, function() {
-           $scope.devices[form.device.id] = form.device;
+    $scope.update = function (form) {
+        Device.update(form.device, function () {
+            $scope.devices[form.device.id] = form.device;
             $scope.closeEditDeviceModal();
         });
     };
 
-    $scope.edit = function(id) {
+    $scope.edit = function (id) {
         $scope.device = $scope.devices[id];
         $scope.openEditDeviceModal();
     };
 
-    $scope.delete = function(id) {
-        Device.delete({id: id}, function() {
+    $scope.delete = function (id) {
+        Device.delete({id: id}, function () {
             delete $scope.devices[id];
         })
     };
@@ -81,16 +81,36 @@ carcloudApp.controller('DeviceCtrl', function ($scope, $ionicModal, Device, devi
 carcloudApp.controller('DeviceSingleCtrl', function ($scope) {
 });
 
-carcloudApp.controller('AccountCtrl', function ($scope) {
+carcloudApp.controller('AccountCtrl', function ($scope, Account, Session) {
+    $scope.success = null;
+    $scope.error = null;
+
+    Account.update($scope.settingsAccount, function (value, responseHeaders) {
+        $scope.error = null;
+        $scope.success = 'OK';
+        Account.get().$promise.then(function (data) {
+                $scope.settingsAccount = data;
+                Session.set(
+                    $scope.settingsAccount.username,
+                    $scope.settingsAccount.firstName,
+                    $scope.settingsAccount.lastName,
+                    $scope.settingsAccount.email
+                )
+            },
+            function (httpResponse) {
+                $scope.success = null;
+                $scope.error = "ERROR";
+            });
+    });
 });
 
 
-carcloudApp.controller('LoginCtrl', function ($scope, AuthenticationSharedService) {
+carcloudApp.controller('LoginCtrl', function ($scope, AuthenticationService) {
 
     $scope.form = {};
 
     $scope.login = function () {
-        AuthenticationSharedService.login({
+        AuthenticationService.login({
             username: $scope.form.username,
             password: $scope.form.password
         });
@@ -98,7 +118,7 @@ carcloudApp.controller('LoginCtrl', function ($scope, AuthenticationSharedServic
 
 });
 
-carcloudApp.controller('LogoutController', function ($location, AuthenticationSharedService) {
-    AuthenticationSharedService.logout();
+carcloudApp.controller('LogoutController', function ($location, AuthenticationService) {
+    AuthenticationService.logout();
     $location.path('/login');
 });
