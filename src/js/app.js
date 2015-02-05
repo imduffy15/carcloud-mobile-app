@@ -86,6 +86,20 @@ carcloudApp
                 access: {
                     authorities: [USER_ROLES.user]
                 }
+            })
+
+
+            .state('app.password', {
+                url: "/password",
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/password.html",
+                        controller: 'PasswordCtrl'
+                    }
+                },
+                access: {
+                    authorities: [USER_ROLES.user]
+                }
             });
 
         $urlRouterProvider.otherwise('app/home');

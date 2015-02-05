@@ -7,23 +7,23 @@
     </ion-nav-bar>
 
     <ion-content class="has-header" padding="true">
-        <form role="form" novalidate ng-submit="update(this)">
+        <form name="form" role="form" novalidate ng-submit="update(this)">
 
             <div class="list">
 
                 <label class="item item-input">
                     <span class="input-label">First name</span>
-                    <input name="firstname" ng-model="form.firstName" type="text">
+                    <input required name="firstname" ng-model="account.firstName" type="text">
                 </label>
 
                 <label class="item item-input">
                     <span class="input-label">Last name</span>
-                    <input name="lastname" ng-model="form.lastName" type="text">
+                    <input required name="lastname" ng-model="account.lastName" type="text">
                 </label>
 
                 <label class="item item-input">
                     <span class="input-label">Email</span>
-                    <input name="email" ng-model="form.email" type="email">
+                    <input required name="email" ng-model="account.email" type="email">
                 </label>
 
             </div>

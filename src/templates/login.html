@@ -2,18 +2,26 @@
     <ion-content class="padding" scroll="false">
         <img class="carcloud-logo" src="img/logo-trans.png">
 
-        <form ng-submit="login()">
-            <div class="ion-list">
+        <form name="form" role="form" novalidate ng-submit="login(this)">
+
+            <div class="list">
                 <label class="item item-input">
                     <i class="icon ion-ios-person placeholder-icon"></i>
-                    <input ng-model="form.username" type="text" placeholder="Username">
+                    <input ng-model="account.username" type="text" placeholder="Username" required>
                 </label>
+
                 <label class="item item-input">
                     <i class="icon ion-locked placeholder-icon"></i>
-                    <input ng-model="form.password" type="password" placeholder="Password">
+                    <input ng-model="account.password" type="password" placeholder="Password" required>
                 </label>
-                <button id="signin-button" type="submit" class="button button-block button-positive">Sign In</button>
+
+                <button type="submit" ng-disabled="form.$invalid" class="button button-full button-positive">
+                    Sign In
+                </button>
+
+
             </div>
+
         </form>
 
     </ion-content>

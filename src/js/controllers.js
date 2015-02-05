@@ -81,37 +81,44 @@ carcloudApp.controller('DeviceCtrl', function ($scope, $ionicModal, Device, devi
 carcloudApp.controller('DeviceSingleCtrl', function ($scope) {
 });
 
-carcloudApp.controller('AccountCtrl', function ($scope, $rootScope, $cordovaDialogs, Account, Session) {
+carcloudApp.controller('AccountCtrl', function ($scope, $rootScope, $cordovaToast, Account, Session) {
 
-    $scope.form = $rootScope.account;
+    $scope.account = $rootScope.account;
 
-    $scope.update = function() {
-        Account.update($scope.form, function () {
+    $scope.update = function(form) {
+        Account.update(form.account, function () {
             Account.get().$promise.then(function (data) {
-                    $scope.settingsAccount = data;
                     Session.set(
-                        $scope.settingsAccount.username,
-                        $scope.settingsAccount.firstName,
-                        $scope.settingsAccount.lastName,
-                        $scope.settingsAccount.email
+                        data.username,
+                        data.firstName,
+                        data.lastName,
+                        data.email
                     );
-                    $cordovaDialogs.alert('Account Successfully Updated', 'Success', 'OK');
+                    $cordovaToast.show('Account Updated', 'short', 'bottom');
                 });
         });
     }
 
 });
 
+carcloudApp.controller('PasswordCtrl', function($scope, Account) {
+    $scope.account = Account.get();
+
+    $scope.changePassword = function(form) {
+        Account.update({
+            'password': form.password,
+            'version': $scope.account.version
+        }, function() {
+            $cordovaToast.show('Password Updated', 'short', 'bottom');
+        });
+    }
+
+});
 
 carcloudApp.controller('LoginCtrl', function ($scope, AuthenticationService) {
 
-    $scope.form = {};
-
-    $scope.login = function () {
-        AuthenticationService.login({
-            username: $scope.form.username,
-            password: $scope.form.password
-        });
+    $scope.login = function (form) {
+        AuthenticationService.login(form.account);
     }
 
 });
