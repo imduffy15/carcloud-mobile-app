@@ -81,27 +81,25 @@ carcloudApp.controller('DeviceCtrl', function ($scope, $ionicModal, Device, devi
 carcloudApp.controller('DeviceSingleCtrl', function ($scope) {
 });
 
-carcloudApp.controller('AccountCtrl', function ($scope, Account, Session) {
-    $scope.success = null;
-    $scope.error = null;
+carcloudApp.controller('AccountCtrl', function ($scope, $rootScope, $cordovaDialogs, Account, Session) {
 
-    Account.update($scope.settingsAccount, function (value, responseHeaders) {
-        $scope.error = null;
-        $scope.success = 'OK';
-        Account.get().$promise.then(function (data) {
-                $scope.settingsAccount = data;
-                Session.set(
-                    $scope.settingsAccount.username,
-                    $scope.settingsAccount.firstName,
-                    $scope.settingsAccount.lastName,
-                    $scope.settingsAccount.email
-                )
-            },
-            function (httpResponse) {
-                $scope.success = null;
-                $scope.error = "ERROR";
-            });
-    });
+    $scope.form = $rootScope.account;
+
+    $scope.update = function() {
+        Account.update($scope.form, function () {
+            Account.get().$promise.then(function (data) {
+                    $scope.settingsAccount = data;
+                    Session.set(
+                        $scope.settingsAccount.username,
+                        $scope.settingsAccount.firstName,
+                        $scope.settingsAccount.lastName,
+                        $scope.settingsAccount.email
+                    );
+                    $cordovaDialogs.alert('Account Successfully Updated', 'Success', 'OK');
+                });
+        });
+    }
+
 });
 
 

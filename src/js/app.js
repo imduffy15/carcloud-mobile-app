@@ -117,19 +117,14 @@ carcloudApp
 
         $rootScope.$on('$stateChangeStart', function (event, next) {
 
-            console.log("route change");
-
             $rootScope.authenticated = !!Session.get();
             $rootScope.account = Session.get();
 
             $rootScope.isAuthorized = AuthenticationService.isAuthorized;
 
             if (Token.get()) {
-                console.log("lalala");
                 httpHeaders.common['Authorization'] = 'Bearer ' + Token.get().accessToken;
             }
-
-            console.log(next);
 
             AuthenticationService.valid(next.access.authorities);
         });
