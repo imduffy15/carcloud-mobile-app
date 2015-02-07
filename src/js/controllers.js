@@ -5,9 +5,11 @@
 carcloudApp.controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
 });
 
-carcloudApp.controller('DeviceCtrl', function ($scope, $ionicModal, Device, devices) {
+carcloudApp.controller('DeviceCtrl', function ($scope, $ionicModal, Device, User, devices) {
 
     $scope.devices = devices;
+
+    console.log(devices);
 
     $ionicModal.fromTemplateUrl('templates/add-device-modal.html', {
         scope: $scope,
@@ -21,6 +23,13 @@ carcloudApp.controller('DeviceCtrl', function ($scope, $ionicModal, Device, devi
         animation: 'slide-left-right'
     }).then(function (modal) {
         $scope.editDeviceModal = modal
+    });
+
+    $ionicModal.fromTemplateUrl('templates/share-device-modal.html', {
+        scope: $scope,
+        animation: 'slide-left-right'
+    }).then(function (modal) {
+        $scope.shareDeviceModal = modal
     });
 
     $scope.openAddDeviceModal = function () {
@@ -38,6 +47,14 @@ carcloudApp.controller('DeviceCtrl', function ($scope, $ionicModal, Device, devi
 
     $scope.closeEditDeviceModal = function () {
         $scope.editDeviceModal.hide();
+    };
+
+    $scope.openShareDeviceModal = function () {
+        $scope.shareDeviceModal.show();
+    };
+
+    $scope.closeShareDeviceModal = function () {
+        $scope.shareDeviceModal.hide();
     };
 
     $scope.create = function (form) {
@@ -60,15 +77,28 @@ carcloudApp.controller('DeviceCtrl', function ($scope, $ionicModal, Device, devi
         });
     };
 
+    $scope.getUsers = function (username) {
+        return User.get({'username': username}).$promise;
+    };
+
     $scope.edit = function (id) {
         $scope.device = $scope.devices[id];
         $scope.openEditDeviceModal();
+    };
+
+    $scope.share = function (id) {
+        $scope.device = $scope.devices[id];
+        $scope.openShareDeviceModal();
     };
 
     $scope.delete = function (id) {
         Device.delete({id: id}, function () {
             delete $scope.devices[id];
         })
+    };
+
+    $scope.selectMatch = function(lala) {
+        console.log("test");
     };
 
     $scope.$on('$destroy', function () {

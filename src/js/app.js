@@ -2,7 +2,7 @@
 
 var httpHeaders;
 
-var carcloudApp = angular.module('carcloudApp', ['ionic', 'ngAnimate', 'ngCordova', 'http-auth-interceptor', 'ngResource', 'ui.gravatar', 'hateoas', 'LocalStorageModule', 'base64']);
+var carcloudApp = angular.module('carcloudApp', ['ionic', 'ngAnimate', 'ngCordova', 'http-auth-interceptor', 'ngResource', 'ui.gravatar', 'hateoas', 'LocalStorageModule', 'base64', 'localytics.directives']);
 
 carcloudApp
     .config(function ($httpProvider, $stateProvider, $urlRouterProvider, USER_ROLES, gravatarServiceProvider, localStorageServiceProvider, HateoasInterceptorProvider) {
@@ -49,6 +49,9 @@ carcloudApp
 
                         Device.query().$promise.then(function (data) {
                             angular.forEach(data, function (device) {
+                                device.resource("owners").get().$promise.then(function(owners) {
+                                   device.owners = owners;
+                                });
                                 devices[device.id] = device;
                             });
                             deferred.resolve(devices);
