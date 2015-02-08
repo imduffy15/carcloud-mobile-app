@@ -9,7 +9,7 @@ carcloudApp.constant('USER_ROLES', {
 });
 
 carcloudApp.constant('API_DETAILS', {
-    baseUrl: 'http://carcloud.ianduffy.ie/',
+    baseUrl: 'http://localhost:8080/',
     clientId: 'carcloudapp',
     clientSecret: 'Echoong7zooNga3tvohy6Xaeoon9Aem3ange8Iga5ooDa1ahb8LaS2',
     grantType: 'password',
