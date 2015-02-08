@@ -118,6 +118,6 @@ ion-popover-view.fit ion-content {
     background: none !important;
 }
 
-.chosen-container {
-    width: 100% !important;
+.selectize-input {
+    padding: 0 0 2px 8px !important;
 }

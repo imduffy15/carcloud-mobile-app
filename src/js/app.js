@@ -2,7 +2,7 @@
 
 var httpHeaders;
 
-var carcloudApp = angular.module('carcloudApp', ['ionic', 'ngAnimate', 'ngCordova', 'http-auth-interceptor', 'ngResource', 'ui.gravatar', 'hateoas', 'LocalStorageModule', 'base64', 'localytics.directives']);
+var carcloudApp = angular.module('carcloudApp', ['ionic', 'ngAnimate', 'ngCordova', 'http-auth-interceptor', 'ngResource', 'ui.gravatar', 'hateoas', 'LocalStorageModule', 'base64', 'ui.select']);
 
 carcloudApp
     .config(function ($httpProvider, $stateProvider, $urlRouterProvider, USER_ROLES, gravatarServiceProvider, localStorageServiceProvider, HateoasInterceptorProvider) {
@@ -72,6 +72,24 @@ carcloudApp
                         templateUrl: "templates/device.html",
                         controller: 'DeviceSingleCtrl'
                     }
+                },
+                resolve: {
+                  device: function($stateParams, $q, Device) {
+                      console.log($stateParams);
+                      var deferred = $q.defer();
+
+                      Device.get({id: $stateParams.id}, function (device) {
+                          device.resource("tracks").query({
+                              fromDate: $stateParams.fromDate,
+                              toDate: $stateParams.toDate
+                          }).$promise.then(function (tracks) {
+                                  device.tracks = tracks;
+                                  deferred.resolve(device);
+                              });
+                      });
+
+                      return deferred.promise;
+                  }
                 },
                 access: {
                     authorities: [USER_ROLES.user]

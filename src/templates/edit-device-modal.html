@@ -1,7 +1,7 @@
-<div class="modal">
+<div class="modal" ng-controller="editDeviceCtrl">
 
     <ion-header-bar align-title="center" class="bar-positive">
-        <button class="button button-clear" ng-click="closeEditDeviceModal()">
+        <button class="button button-clear" ng-click="editDeviceModal.hide()">
             <i class="ion-ios-arrow-back"></i>
         </button>
         <h1 class="title">Edit a Device</h1>
@@ -38,7 +38,7 @@
 
             </div>
 
-            <button type="button" class="button button-full button-dark" ng-click="closeEditDeviceModal()">
+            <button type="button" class="button button-full button-dark" ng-click="editDeviceModal.hide()">
                 <span class="ion-android-cancel"></span> Cancel
             </button>
 
