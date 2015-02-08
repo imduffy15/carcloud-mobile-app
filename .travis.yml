@@ -15,7 +15,8 @@ env:
   - secure: O6Jl4M2X0K0IKQ8zq/Em1o5POOI4Xl4DG3qTY/QS1/E4jX0+01UpnX0MhEGWoJwqPspIjbcRaNDQCkrQ7oIt+r/hI5zM0bzXJpZ2wEnatZWb//mDoSU5Ge6kbpVk7PrJNsyuU1lkm55m1122Sj1DKuw2N8ZZxsboWiSdY1zoIdQ=
   - secure: ARlWrUWM1DGojjRY9rXJt3OIeGe8XdeNY5ptFsW1ZLl3dpdDUmemTZCh1rPpsb9ZcKGVIrh+cQi5QlNvdTd0XsnIrB4CcU8HMWBC2qMgCzpwXiQr/GuHhY0Vqwd519dHOIFx4E4L+G/qCEJ6EU3YHwsOLBoWujBla4r9CSjQXk8=
 before_install:
-- echo $encrypted
+- echo $encrypted > lalala.txt
+- cat lalala.txt
 - openssl aes-256-cbc -K $encrypted_9edc950bc507_key -iv $encrypted_9edc950bc507_iv
   -in carcloud-release-key.keystore.enc -out carcloud-release-key.keystore -d
 - echo "Before install stage"
