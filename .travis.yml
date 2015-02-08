@@ -15,9 +15,6 @@ env:
   - secure: O6Jl4M2X0K0IKQ8zq/Em1o5POOI4Xl4DG3qTY/QS1/E4jX0+01UpnX0MhEGWoJwqPspIjbcRaNDQCkrQ7oIt+r/hI5zM0bzXJpZ2wEnatZWb//mDoSU5Ge6kbpVk7PrJNsyuU1lkm55m1122Sj1DKuw2N8ZZxsboWiSdY1zoIdQ=
   - secure: ARlWrUWM1DGojjRY9rXJt3OIeGe8XdeNY5ptFsW1ZLl3dpdDUmemTZCh1rPpsb9ZcKGVIrh+cQi5QlNvdTd0XsnIrB4CcU8HMWBC2qMgCzpwXiQr/GuHhY0Vqwd519dHOIFx4E4L+G/qCEJ6EU3YHwsOLBoWujBla4r9CSjQXk8=
 before_install:
-- echo $encrypted_9edc950bc507_key
-- echo $encrypted_9edc950bc507_iv
-- echo $STOREPASS
 - openssl aes-256-cbc -K $encrypted_9edc950bc507_key -iv $encrypted_9edc950bc507_iv
   -in carcloud-release-key.keystore.enc -out carcloud-release-key.keystore -d
 - echo "Before install stage"
@@ -43,6 +40,7 @@ script:
 - cordova plugin add https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin.git
 - cordova plugin add org.apache.cordova.network-information
 - cordova plugin add https://github.com/driftyco/ionic-plugins-keyboard.git
+- cordova plugin add plugin.google.maps --variable API_KEY_FOR_ANDROID="AIzaSyBqw_9GnlehQw0da-KTRLEqaBzoHb3-JS8" --variable API_KEY_FOR_IOS="AIzaSyCmBX45pG6DJFSdiiayOsXj9al7mECzOvk"
 - mkdir -p platforms/ios/CarCloud/Resources/icons
 - mkdir -p platforms/ios/CarCloud/Resources/splash
 - cordova-gen www/img/all.png "#FFF"
