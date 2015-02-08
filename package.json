@@ -27,6 +27,12 @@
     "proxy-middleware": "0.5.0"
   },
   "cordovaPlugins": [
-    "plugin.google.maps"
+    "plugin.google.maps",
+    "org.apache.cordova.splashscreen",
+    "org.apache.cordova.device",
+    "org.apache.cordova.dialogs",
+    "https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin.git",
+    "org.apache.cordova.network-information",
+    "https://github.com/driftyco/ionic-plugins-keyboard.git"
   ]
 }

@@ -65,14 +65,10 @@ carcloudApp
                 }
             })
 
-            .state('app.device', {
-                url: "/device/:id",
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/device.html",
-                        controller: 'DeviceSingleCtrl'
-                    }
-                },
+            .state('device', {
+                url: "/app/device/:id",
+                templateUrl: 'templates/device.html',
+                controller: 'DeviceSingleCtrl',
                 resolve: {
                   device: function($stateParams, $q, Device) {
                       console.log($stateParams);
@@ -146,6 +142,7 @@ carcloudApp
                 // org.apache.cordova.statusbar required
                 StatusBar.styleDefault();
             }
+
         });
 
         $rootScope.userRoles = USER_ROLES;
