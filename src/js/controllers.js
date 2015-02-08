@@ -77,6 +77,7 @@ carcloudApp.controller('DeviceSingleCtrl', function ($scope, $ionicPopover, $ion
             'toDate': '2015-12-12'
         }).$promise.then(function (tracks) {
                 device.tracks = tracks;
+                console.log(device);
                 addMarkers();
             });
     };
