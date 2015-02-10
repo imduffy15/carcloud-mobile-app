@@ -64,8 +64,8 @@ carcloudApp.controller('DeviceCtrl', function ($scope, $ionicModal, Device, User
 carcloudApp.controller('DeviceSingleCtrl', function ($scope, $ionicPopover, $ionicModal, $state, $filter, Device, device) {
 
 
-            var div = document.getElementById("map_canvas");
-            var map = plugin.google.maps.Map.getMap(div);
+    var div = document.getElementById("map_canvas");
+    var map = plugin.google.maps.Map.getMap(div);
 
     $scope.device = device;
 
@@ -76,11 +76,21 @@ carcloudApp.controller('DeviceSingleCtrl', function ($scope, $ionicPopover, $ion
     });
 
     $scope.openPopover = function($event) {
+        map.setClickable(false);
         $scope.popover.show($event);
     };
+
     $scope.closePopover = function() {
         $scope.popover.hide();
     };
+
+    $scope.$on('popover.hidden', function() {
+        map.setClickable(true);
+    });
+
+    $scope.$on('popover.removed', function() {
+        map.setClickable(true);
+    });
 
     $scope.$on('$destroy', function() {
         $scope.addDeviceModal.remove();
