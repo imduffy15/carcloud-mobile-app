@@ -69,6 +69,32 @@ carcloudApp.controller('DeviceSingleCtrl', function ($scope, $ionicPopover, $ion
 
     $scope.device = device;
 
+    angular.forEach(device.tracks, function(track) {
+
+        var fields = "";
+
+        if(track.fields.length > 0 ) {
+            fields = "Name\t\t\tValue\n";
+            angular.forEach(track.fields, function(field) {
+                fields = fields + field.name +"\t\t\t" + field.value + "\n";
+            });
+        }
+
+        var snippet = "Longitude: " + track.longitude + "\n";
+        snippet = snippet + "Latitude: " + track.latitude  + "\n";
+        snippet = snippet + "Recorded at: " + new Date(track.recordedAt)  + "\n";
+
+        snippet = snippet + fields;
+
+        map.addMarker({
+            'position': new plugin.google.maps.LatLng(track.latitude, track.longitude),
+            'title': 'Track ' + track.id,
+            'snippet': snippet
+        })
+
+    });
+
+
     $ionicPopover.fromTemplateUrl('templates/device-popover.html', {
         scope: $scope
     }).then(function(popover) {

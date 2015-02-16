@@ -76,8 +76,8 @@ carcloudApp
 
                       Device.get({id: $stateParams.id}, function (device) {
                           device.resource("tracks").query({
-                              fromDate: $stateParams.fromDate,
-                              toDate: $stateParams.toDate
+                              fromDate: '2014-01-01',
+                              toDate: '2016-01-01'
                           }).$promise.then(function (tracks) {
                                   device.tracks = tracks;
                                   deferred.resolve(device);
