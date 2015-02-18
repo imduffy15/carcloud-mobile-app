@@ -34,10 +34,10 @@ script:
 - sed -i -e 's/CordovaApp/CarCloud/g' platforms/android/AndroidManifest.xml
 - mv platforms/android/src/ie/ianduffy/carcloud/CordovaApp.java platforms/android/src/ie/ianduffy/carcloud/CarCloud.java
 - sed -i -e 's/CordovaApp/CarCloud/g' platforms/android/src/ie/ianduffy/carcloud/CarCloud.java
+- cordova plugin add https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin.git
 - cordova plugin add org.apache.cordova.splashscreen
 - cordova plugin add org.apache.cordova.device
 - cordova plugin add org.apache.cordova.dialogs
-- cordova plugin add https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin.git
 - cordova plugin add org.apache.cordova.network-information
 - cordova plugin add https://github.com/driftyco/ionic-plugins-keyboard.git
 - cordova plugin add plugin.google.maps --variable API_KEY_FOR_ANDROID="AIzaSyBqw_9GnlehQw0da-KTRLEqaBzoHb3-JS8" --variable API_KEY_FOR_IOS="AIzaSyCmBX45pG6DJFSdiiayOsXj9al7mECzOvk"

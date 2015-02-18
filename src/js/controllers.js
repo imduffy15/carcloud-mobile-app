@@ -69,56 +69,77 @@ carcloudApp.controller('DeviceSingleCtrl', function ($scope, $ionicPopover, $ion
 
     $scope.device = device;
 
-    angular.forEach(device.tracks, function(track) {
 
-        var fields = "";
+    $scope.onChangeDate = function () {
 
-        if(track.fields.length > 0 ) {
-            fields = "Name\t\t\tValue\n";
-            angular.forEach(track.fields, function(field) {
-                fields = fields + field.name +"\t\t\t" + field.value + "\n";
+        var dateFormat = 'yyyy-MM-dd';
+        var fromDate = $filter('date')($scope.fromDate, dateFormat);
+        var toDate = $filter('date')($scope.toDate, dateFormat);
+
+        device.resource("tracks").query({
+            'fromDate': fromDate,
+            'toDate': toDate
+        }).$promise.then(function (tracks) {
+                device.tracks = tracks;
+                map.clear();
+                addMarkers();
             });
-        }
 
-        var snippet = "Longitude: " + track.longitude + "\n";
-        snippet = snippet + "Latitude: " + track.latitude  + "\n";
-        snippet = snippet + "Recorded at: " + new Date(track.recordedAt)  + "\n";
+    };
 
-        snippet = snippet + fields;
+    var addMarkers = function () {
+        angular.forEach(device.tracks, function (track) {
 
-        map.addMarker({
-            'position': new plugin.google.maps.LatLng(track.latitude, track.longitude),
-            'title': 'Track ' + track.id,
-            'snippet': snippet
-        })
+            var fields = "";
 
-    });
+            if (track.fields.length > 0) {
+                fields = "Name\t\t\tValue\n";
+                angular.forEach(track.fields, function (field) {
+                    fields = fields + field.name + "\t\t\t" + field.value + "\n";
+                });
+            }
 
+            var snippet = "Longitude: " + track.longitude + "\n";
+            snippet = snippet + "Latitude: " + track.latitude + "\n";
+            snippet = snippet + "Recorded at: " + new Date(track.recordedAt) + "\n";
+
+            snippet = snippet + fields;
+
+            map.addMarker({
+                'position': new plugin.google.maps.LatLng(track.latitude, track.longitude),
+                'title': 'Track ' + track.id,
+                'snippet': snippet
+            })
+
+        });
+    };
+
+    addMarkers();
 
     $ionicPopover.fromTemplateUrl('templates/device-popover.html', {
         scope: $scope
-    }).then(function(popover) {
+    }).then(function (popover) {
         $scope.popover = popover;
     });
 
-    $scope.openPopover = function($event) {
+    $scope.openPopover = function ($event) {
         map.setClickable(false);
         $scope.popover.show($event);
     };
 
-    $scope.closePopover = function() {
+    $scope.closePopover = function () {
         $scope.popover.hide();
     };
 
-    $scope.$on('popover.hidden', function() {
+    $scope.$on('popover.hidden', function () {
         map.setClickable(true);
     });
 
-    $scope.$on('popover.removed', function() {
+    $scope.$on('popover.removed', function () {
         map.setClickable(true);
     });
 
-    $scope.$on('$destroy', function() {
+    $scope.$on('$destroy', function () {
         $scope.addDeviceModal.remove();
         $scope.editDeviceModal.remove();
         $scope.shareDeviceModal.remove();
@@ -156,7 +177,7 @@ carcloudApp.controller('DeviceSingleCtrl', function ($scope, $ionicPopover, $ion
     };
 
     $scope.delete = function () {
-        Device.delete({id: $scope.device.id}, function() {
+        Device.delete({id: $scope.device.id}, function () {
             $state.transitionTo('app.home', {}, {'reload': true});
         });
     };
@@ -167,30 +188,30 @@ carcloudApp.controller('AccountCtrl', function ($scope, $rootScope, $cordovaToas
 
     $scope.account = $rootScope.account;
 
-    $scope.update = function(form) {
+    $scope.update = function (form) {
         Account.update(form.account, function () {
             Account.get().$promise.then(function (data) {
-                    Session.set(
-                        data.username,
-                        data.firstName,
-                        data.lastName,
-                        data.email
-                    );
-                    $cordovaToast.show('Account updated', 'short', 'center');
-                });
+                Session.set(
+                    data.username,
+                    data.firstName,
+                    data.lastName,
+                    data.email
+                );
+                $cordovaToast.show('Account updated', 'short', 'center');
+            });
         });
     }
 
 });
 
-carcloudApp.controller('PasswordCtrl', function($scope, $cordovaToast, Account) {
+carcloudApp.controller('PasswordCtrl', function ($scope, $cordovaToast, Account) {
     $scope.account = Account.get();
 
-    $scope.changePassword = function(form) {
+    $scope.changePassword = function (form) {
         Account.update({
             'password': form.password,
             'version': $scope.account.version
-        }, function() {
+        }, function () {
             $cordovaToast.show('Password updated', 'short', 'center')
         });
     }
@@ -203,7 +224,7 @@ carcloudApp.controller('shareDeviceCtrl', function ($scope, User) {
     $scope.users = [];
 
     $scope.getUsers = function (username) {
-        User.get({'username': username}).$promise.then(function(users) {
+        User.get({'username': username}).$promise.then(function (users) {
             $scope.users = users;
         });
     };
@@ -227,7 +248,7 @@ carcloudApp.controller('shareDeviceCtrl', function ($scope, User) {
             });
     };
 
-    $scope.removeOwner = function(username) {
+    $scope.removeOwner = function (username) {
         $scope.device.resource("owners").delete({id: username}).$promise.then(function (success) {
             delete $scope.device.owners[username];
         });
