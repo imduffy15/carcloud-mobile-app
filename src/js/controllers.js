@@ -123,6 +123,7 @@ carcloudApp.controller('DeviceSingleCtrl', function ($scope, $ionicPopover, $ion
         $scope.editDeviceModal.remove();
         $scope.shareDeviceModal.remove();
         $scope.popover.remove();
+        map.remove();
     });
 
     $ionicModal.fromTemplateUrl('templates/add-device-modal.html', {
