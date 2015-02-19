@@ -75,6 +75,8 @@ carcloudApp
                       var deferred = $q.defer();
 
                       Device.get({id: $stateParams.id}, function (device) {
+
+
                           device.resource("tracks").query({
                               fromDate: $stateParams.fromDate,
                               toDate: $stateParams.toDate

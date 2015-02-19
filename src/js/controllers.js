@@ -70,7 +70,7 @@ carcloudApp.controller('DeviceSingleCtrl', function ($scope, $ionicPopover, $ion
     $scope.device = device;
 
 
-    $scope.onChangeDate = function () {
+    $scope.onChangeDate = function() {
 
         var dateFormat = 'yyyy-MM-dd';
         var fromDate = $filter('date')($scope.fromDate, dateFormat);
@@ -118,28 +118,28 @@ carcloudApp.controller('DeviceSingleCtrl', function ($scope, $ionicPopover, $ion
 
     $ionicPopover.fromTemplateUrl('templates/device-popover.html', {
         scope: $scope
-    }).then(function (popover) {
+    }).then(function(popover) {
         $scope.popover = popover;
     });
 
-    $scope.openPopover = function ($event) {
+    $scope.openPopover = function($event) {
         map.setClickable(false);
         $scope.popover.show($event);
     };
 
-    $scope.closePopover = function () {
+    $scope.closePopover = function() {
         $scope.popover.hide();
     };
 
-    $scope.$on('popover.hidden', function () {
+    $scope.$on('popover.hidden', function() {
         map.setClickable(true);
     });
 
-    $scope.$on('popover.removed', function () {
+    $scope.$on('popover.removed', function() {
         map.setClickable(true);
     });
 
-    $scope.$on('$destroy', function () {
+    $scope.$on('$destroy', function() {
         $scope.addDeviceModal.remove();
         $scope.editDeviceModal.remove();
         $scope.shareDeviceModal.remove();
@@ -177,7 +177,7 @@ carcloudApp.controller('DeviceSingleCtrl', function ($scope, $ionicPopover, $ion
     };
 
     $scope.delete = function () {
-        Device.delete({id: $scope.device.id}, function () {
+        Device.delete({id: $scope.device.id}, function() {
             $state.transitionTo('app.home', {}, {'reload': true});
         });
     };
@@ -188,30 +188,30 @@ carcloudApp.controller('AccountCtrl', function ($scope, $rootScope, $cordovaToas
 
     $scope.account = $rootScope.account;
 
-    $scope.update = function (form) {
+    $scope.update = function(form) {
         Account.update(form.account, function () {
             Account.get().$promise.then(function (data) {
-                Session.set(
-                    data.username,
-                    data.firstName,
-                    data.lastName,
-                    data.email
-                );
-                $cordovaToast.show('Account updated', 'short', 'center');
-            });
+                    Session.set(
+                        data.username,
+                        data.firstName,
+                        data.lastName,
+                        data.email
+                    );
+                    $cordovaToast.show('Account updated', 'short', 'center');
+                });
         });
     }
 
 });
 
-carcloudApp.controller('PasswordCtrl', function ($scope, $cordovaToast, Account) {
+carcloudApp.controller('PasswordCtrl', function($scope, $cordovaToast, Account) {
     $scope.account = Account.get();
 
-    $scope.changePassword = function (form) {
+    $scope.changePassword = function(form) {
         Account.update({
             'password': form.password,
             'version': $scope.account.version
-        }, function () {
+        }, function() {
             $cordovaToast.show('Password updated', 'short', 'center')
         });
     }
@@ -224,7 +224,7 @@ carcloudApp.controller('shareDeviceCtrl', function ($scope, User) {
     $scope.users = [];
 
     $scope.getUsers = function (username) {
-        User.get({'username': username}).$promise.then(function (users) {
+        User.get({'username': username}).$promise.then(function(users) {
             $scope.users = users;
         });
     };
@@ -248,7 +248,7 @@ carcloudApp.controller('shareDeviceCtrl', function ($scope, User) {
             });
     };
 
-    $scope.removeOwner = function (username) {
+    $scope.removeOwner = function(username) {
         $scope.device.resource("owners").delete({id: username}).$promise.then(function (success) {
             delete $scope.device.owners[username];
         });

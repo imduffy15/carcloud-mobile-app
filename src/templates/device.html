@@ -10,7 +10,16 @@
         </ion-nav-buttons>
     </ion-nav-bar>
 
-    <ion-content class="has-header">
+    <div class="bar bar-subheader item-input-inset">
+
+            <input type="date" name="start" ng-model="fromDate" required placeholder="Start Date"/>
+
+            <input type="date" name="end" ng-model="toDate" required placeholder="End Date"/>
+
+        <button ng-click="onChangeDate()" class="button icon ion-ios-paperplane"></button>
+    </div>
+
+    <ion-content class="has-header has-subheader">
         <div id="map_canvas"></div>
     </ion-content>
 </ion-view>

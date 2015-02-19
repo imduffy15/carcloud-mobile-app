@@ -127,3 +127,12 @@ ion-popover-view.fit ion-content {
 .scroll {
   height: 100%;
 }
+
+input[type="date"]:before {
+    content: attr(placeholder);
+    color: #aaa;
+}
+
+input[type="date"]:focus:before, input[type="date"]:valid:before {
+    content: "";
+}
