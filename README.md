@@ -33,7 +33,7 @@ CarCloud will be a mobile and web based desktop application that focuses on supp
 
  - Spring boot - Skeleton configuration for creating spring applications.
  - Maven - build automation tool for java.
- - Spring MVC - Web component of the Spring Framework. Provides rich functionality for building robust Web Applications.
+ - Spring MVC - Web component sof the Spring Framework. Provides rich functionality for building robust Web Applications.
  - Jackson - JSON marshaller for java.
  - Spring Data JPA - Easily implemented Java Persistence API based repositories. 
  - Hibernate - Object-relational mapping library for java.
