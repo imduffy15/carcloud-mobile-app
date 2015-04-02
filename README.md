@@ -8,7 +8,7 @@ The internet of things is a computing vision where everyday physical objects wil
 
 The internet of things is significant because an object than can represent itself digitally becomes something greater than the object itself. No longer does the object relate to just its user, but it is now connected to surrounding objects and a database. 
 
-By installing a device with GPS, 3D Accelerometer and GSM modem into a car’s on-board computer one can stream several metrics into the clouds. Such data appeals to many business models and applications including: 
+By installing a devdice with GPS, 3D Accelerometer and GSM modem into a car’s on-board computer one can stream several metrics into the clouds. Such data appeals to many business models and applications including: 
 
  - Ecodriving: fuel calculation, RPM analysis and idling detection.
  - Location aware services: position, heading and speed.
