@@ -31,9 +31,7 @@ script:
 - echo "Script stage"
 - gulp
 - ionic platform add android
-- sed -i -e 's/CordovaApp/CarCloud/g' platforms/android/AndroidManifest.xml
-- mv platforms/android/src/ie/ianduffy/carcloud/CordovaApp.java platforms/android/src/ie/ianduffy/carcloud/CarCloud.java
-- sed -i -e 's/CordovaApp/CarCloud/g' platforms/android/src/ie/ianduffy/carcloud/CarCloud.java
+- tree platforms
 - cordova plugin add https://github.com/EddyVerbruggen/Toast-PhoneGap-Plugin.git
 - cordova plugin add org.apache.cordova.splashscreen
 - cordova plugin add org.apache.cordova.device
