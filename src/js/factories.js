@@ -24,7 +24,7 @@ carcloudApp.factory('Session', function (localStorageService, $rootScope) {
 
     var session = {};
 
-    session.set = function (username, firstName, lastName, email, authorities) {
+    session.set = function (username, firstName, lastName, email, phone, authorities) {
         var data = localStorageService.get('session') || {};
         if (username) {
             data.username = username;
@@ -40,6 +40,9 @@ carcloudApp.factory('Session', function (localStorageService, $rootScope) {
         }
         if (authorities) {
             data.authorities = authorities;
+        }
+        if (phone) {
+            data.phone = phone;
         }
         $rootScope.account = data;
         localStorageService.set('session', data);
@@ -116,6 +119,7 @@ carcloudApp.factory('AuthenticationService',
                                 account.firstName,
                                 account.lastName,
                                 account.email,
+                                account.phone,
                                 authorities
                             );
                             authService.loginConfirmed(null, function (config) {

@@ -70,6 +70,8 @@ carcloudApp.controller('DeviceSingleCtrl', function ($scope, $ionicPopover, $ion
     $scope.device = device;
 
 
+    var markers = [];
+
     $scope.onChangeDate = function() {
 
         var dateFormat = 'yyyy-MM-dd';
@@ -82,6 +84,7 @@ carcloudApp.controller('DeviceSingleCtrl', function ($scope, $ionicPopover, $ion
         }).$promise.then(function (tracks) {
                 device.tracks = tracks;
                 map.clear();
+                markers = [];
                 addMarkers();
             });
 
@@ -109,9 +112,19 @@ carcloudApp.controller('DeviceSingleCtrl', function ($scope, $ionicPopover, $ion
                 'position': new plugin.google.maps.LatLng(track.latitude, track.longitude),
                 'title': 'Track ' + track.id,
                 'snippet': snippet
-            })
+            });
+            markers.push({'position': new plugin.google.maps.LatLng(track.latitude, track.longitude)});
 
         });
+
+        var middle = markers[Math.round((markers.length - 1) / 2)];
+        if (middle) {
+            map.animateCamera({
+                'target': middle.position,
+                'zoom': 8,
+                'duration': 100
+            });
+        }
     };
 
     addMarkers();
