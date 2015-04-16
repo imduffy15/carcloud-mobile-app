@@ -10,22 +10,22 @@
     <ion-content class="has-header" padding="false" scroll="false">
 
         <div class="bar bar-header item-input-inset force-overflow">
-            <div class="item-input-wrapper force-remove-bg">
+            <!--<div class="item-input-wrapper force-remove-bg">-->
 
-                <ui-select ng-model="search.selected"
-                           theme="selectize"
-                           reset-search-input="false"
-                           style="width: 100%">
+                <!--<ui-select ng-model="search.selected"-->
+                           <!--theme="selectize"-->
+                           <!--reset-search-input="false"-->
+                           <!--style="width: 100%">-->
 
-                    <ui-select-match placeholder="Select a user">{{$select.selected.username}}</ui-select-match>
-                    <ui-select-choices repeat="user in users track by $index"
-                                       refresh="getUsers($select.search)"
-                                       refresh-delay="0">
+                    <!--<ui-select-match placeholder="Select a user">{{$select.selected.username}}</ui-select-match>-->
+                    <!--<ui-select-choices repeat="user in users track by $index"-->
+                                       <!--refresh="getUsers($select.search)"-->
+                                       <!--refresh-delay="0">-->
 
-                        <div ng-bind-html="user.username | highlight: $select.search"></div>
-                    </ui-select-choices>
-                </ui-select>
-            </div>
+                        <!--<div ng-bind-html="user.username | highlight: $select.search"></div>-->
+                    <!--</ui-select-choices>-->
+                <!--</ui-select>-->
+            <!--</div>-->
 
                 <button class="button button-positive" ng-click="addOwner()">
                     Add

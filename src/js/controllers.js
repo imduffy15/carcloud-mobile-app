@@ -222,12 +222,12 @@ carcloudApp.controller('PasswordCtrl', function($scope, $cordovaToast, Account) 
 carcloudApp.controller('shareDeviceCtrl', function ($scope, User) {
 
     $scope.users = [];
-
-    $scope.getUsers = function (username) {
-        User.get({'username': username}).$promise.then(function(users) {
-            $scope.users = users;
-        });
-    };
+    //
+    //$scope.getUsers = function (username) {
+    //    User.get({'username': username}).$promise.then(function(users) {
+    //        $scope.users = users;
+    //    });
+    //};
 
     $scope.search = {};
 

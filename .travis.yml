@@ -41,9 +41,7 @@ script:
 - cordova plugin add org.apache.cordova.network-information
 - cordova plugin add https://github.com/driftyco/ionic-plugins-keyboard.git
 - cordova plugin add plugin.google.maps --variable API_KEY_FOR_ANDROID="AIzaSyBqw_9GnlehQw0da-KTRLEqaBzoHb3-JS8" --variable API_KEY_FOR_IOS="AIzaSyCmBX45pG6DJFSdiiayOsXj9al7mECzOvk"
-- mkdir -p platforms/ios/CarCloud/Resources/icons
-- mkdir -p platforms/ios/CarCloud/Resources/splash
-- cordova-gen www/img/all.png "#FFF"
+- ionic resources --splash --icon
 - ionic build --release android
 after_success:
 - bash ./.push-release.sh

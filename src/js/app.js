@@ -44,13 +44,14 @@ carcloudApp
                 },
                 resolve: {
                     devices: function ($q, Device) {
+
                         var deferred = $q.defer();
                         var devices = {};
 
                         Device.query().$promise.then(function (data) {
                             angular.forEach(data, function (device) {
                                 device.resource("owners").get().$promise.then(function(owners) {
-                                   device.owners = owners;
+                                    device.owners = owners;
                                 });
                                 devices[device.id] = device;
                             });
@@ -119,6 +120,13 @@ carcloudApp
                 access: {
                     authorities: [USER_ROLES.user]
                 }
+            })
+
+            .state('error', {
+                url: '/error',
+                access: {
+                    authorities: [USER_ROLES.all]
+                }
             });
 
         $urlRouterProvider.otherwise('app/home');
@@ -132,9 +140,19 @@ carcloudApp
     })
 
     .run(function ($ionicPlatform, $rootScope, $location, $http, AuthenticationService, Session, USER_ROLES,
-                   Token) {
+                   Token, $cordovaNetwork, $cordovaDialogs) {
 
         $ionicPlatform.ready(function () {
+
+            if(navigator.connection) {
+                if($cordovaNetwork.isOffline()) {
+                    $cordovaDialogs.alert('No internet connection was found. Please try again when you have internet.', 'No connection detected', 'Exit')
+                        .then(function() {
+                            navigator.app.exitApp();
+                        });
+                }
+            }
+
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
             if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -190,7 +208,7 @@ carcloudApp
 
         // Call when the 403 response is returned by the server
         $rootScope.$on('event:auth-notAuthorized', function (rejection) {
-            $rootScope.errorMessage = 'errors.403';
+            $rootScope.errorMessage = 'Not authorized.';
             $location.path('/error');
         });
 

@@ -6,6 +6,10 @@
     padding: 18px;
 }
 
+ion-nav-view {
+    background-color: white;
+}
+
 .item-input {
     border-width: 0 0 1px 0;
     margin-bottom: 13px;
