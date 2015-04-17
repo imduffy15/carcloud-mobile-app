@@ -135,7 +135,7 @@ carcloudApp.controller('DeviceSingleCtrl', function ($scope, $ionicPopover, $ion
     });
 
     $scope.openPopover = function ($event) {
-        // map.setClickable(false);
+        map.setClickable(false);
         $scope.popover.show($event);
     };
 
@@ -144,11 +144,11 @@ carcloudApp.controller('DeviceSingleCtrl', function ($scope, $ionicPopover, $ion
     };
 
     $scope.$on('popover.hidden', function () {
-        // map.setClickable(true);
+        map.setClickable(true);
     });
 
     $scope.$on('popover.removed', function () {
-        // map.setClickable(true);
+        map.setClickable(true);
     });
 
     $scope.$on('$destroy', function () {
