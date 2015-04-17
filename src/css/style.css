@@ -41,21 +41,21 @@ ion-nav-view {
 }
 
 .float-button {
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  border-radius: 50%;
-  width: 28px;
-  padding: 28px;
-  font-size: 24px;
-  position: fixed;
-  bottom: 20px; /* Adjust to where you want it */
-  right: 20px; /* Adjust to where you want it */
-  z-index: 9999;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23);
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    width: 28px;
+    padding: 28px;
+    font-size: 24px;
+    position: fixed;
+    bottom: 20px; /* Adjust to where you want it */
+    right: 20px; /* Adjust to where you want it */
+    z-index: 9999;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.23);
 }
 
 .float-button .height_fix {
-  margin-top: 100%;
+    margin-top: 100%;
 }
 
 .float-button.float-button-positive {
@@ -67,17 +67,17 @@ ion-nav-view {
 }
 
 .float-button .content {
-  position: absolute;
-  left: 0;
-  top: 50%;
-  height: 100%;
-  width: 100%;
-  text-align: center;
-  margin-top: -12px; /* Note, this must be half the font size */
-  color: white;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    margin-top: -12px; /* Note, this must be half the font size */
+    color: white;
 }
 
-.modal{
+.modal {
     top: 0;
     bottom: 0;
     left: 0;
@@ -86,7 +86,7 @@ ion-nav-view {
 }
 
 .item-input {
-     padding: 6px 0 0 0;
+    padding: 6px 0 0 0;
 }
 
 .item-input input {
@@ -123,13 +123,13 @@ ion-popover-view.fit ion-content {
 }
 
 #map_canvas {
-  display: block;
-  width: 100%;
-  height: 100%;
+    display: block;
+    width: 100%;
+    height: 100%;
 }
 
 .scroll {
-  height: 100%;
+    height: 100%;
 }
 
 input[type="date"]:before {
@@ -142,22 +142,22 @@ input[type="date"]:focus:before, input[type="date"]:valid:before {
 }
 
 .dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 1000;
-  display: none;
-  float: left;
-  min-width: 160px;
-  padding: 5px 0;
-  margin: 2px 0 0;
-  font-size: 14px;
-  list-style: none;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #ccc;
-  border: 1px solid rgba(0, 0, 0, .15);
-  border-radius: 4px;
-  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
-          box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
 }

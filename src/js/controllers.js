@@ -65,14 +65,13 @@ carcloudApp.controller('DeviceSingleCtrl', function ($scope, $ionicPopover, $ion
 
 
     var div = document.getElementById("map_canvas");
-    var map = {};
+    var map = plugin.google.maps.Map.getMap(div);
 
     $scope.device = device;
 
-
     var markers = [];
 
-    $scope.onChangeDate = function() {
+    $scope.onChangeDate = function () {
 
         var dateFormat = 'yyyy-MM-dd';
         var fromDate = $filter('date')($scope.fromDate, dateFormat);
@@ -131,28 +130,28 @@ carcloudApp.controller('DeviceSingleCtrl', function ($scope, $ionicPopover, $ion
 
     $ionicPopover.fromTemplateUrl('templates/device-popover.html', {
         scope: $scope
-    }).then(function(popover) {
+    }).then(function (popover) {
         $scope.popover = popover;
     });
 
-    $scope.openPopover = function($event) {
-        map.setClickable(false);
+    $scope.openPopover = function ($event) {
+        // map.setClickable(false);
         $scope.popover.show($event);
     };
 
-    $scope.closePopover = function() {
+    $scope.closePopover = function () {
         $scope.popover.hide();
     };
 
-    $scope.$on('popover.hidden', function() {
-        map.setClickable(true);
+    $scope.$on('popover.hidden', function () {
+        // map.setClickable(true);
     });
 
-    $scope.$on('popover.removed', function() {
-        map.setClickable(true);
+    $scope.$on('popover.removed', function () {
+        // map.setClickable(true);
     });
 
-    $scope.$on('$destroy', function() {
+    $scope.$on('$destroy', function () {
         $scope.addDeviceModal.remove();
         $scope.editDeviceModal.remove();
         $scope.shareDeviceModal.remove();
@@ -190,7 +189,7 @@ carcloudApp.controller('DeviceSingleCtrl', function ($scope, $ionicPopover, $ion
     };
 
     $scope.delete = function () {
-        Device.delete({id: $scope.device.id}, function() {
+        Device.delete({id: $scope.device.id}, function () {
             $state.transitionTo('app.home', {}, {'reload': true});
         });
     };
@@ -201,30 +200,30 @@ carcloudApp.controller('AccountCtrl', function ($scope, $rootScope, $cordovaToas
 
     $scope.account = $rootScope.account;
 
-    $scope.update = function(form) {
+    $scope.update = function (form) {
         Account.update(form.account, function () {
             Account.get().$promise.then(function (data) {
-                    Session.set(
-                        data.username,
-                        data.firstName,
-                        data.lastName,
-                        data.email
-                    );
-                    $cordovaToast.show('Account updated', 'short', 'center');
-                });
+                Session.set(
+                    data.username,
+                    data.firstName,
+                    data.lastName,
+                    data.email,
+                    data.phone
+                );
+                $cordovaToast.show('Account updated', 'short', 'center');
+            });
         });
     }
 
 });
 
-carcloudApp.controller('PasswordCtrl', function($scope, $cordovaToast, Account) {
+carcloudApp.controller('PasswordCtrl', function ($scope, $cordovaToast, Account) {
     $scope.account = Account.get();
 
-    $scope.changePassword = function(form) {
+    $scope.changePassword = function (form) {
         Account.update({
-            'password': form.password,
-            'version': $scope.account.version
-        }, function() {
+            'password': form.password
+        }, function () {
             $cordovaToast.show('Password updated', 'short', 'center')
         });
     }
@@ -234,33 +233,30 @@ carcloudApp.controller('PasswordCtrl', function($scope, $cordovaToast, Account) 
 
 carcloudApp.controller('shareDeviceCtrl', function ($scope, User) {
 
-        $scope.searched = {};
+    $scope.searched = {};
 
-        $scope.getUsers = function (username) {
-            return User.get({'username': username}).$promise;
-        };
+    $scope.getUsers = function (username) {
+        return User.get({'username': username}).$promise;
+    };
 
-        $scope.addOwner = function () {
-            $scope.device.resource("owners").save($scope.searched.usernameSelected,
-                function () {
-
-                    $scope.device.resource("owners").get().$promise.then(function (owners) {
-                        angular.forEach(owners,
-                            function (value,
-                                      key) {
-                                if (!$scope.device.owners[key]) {
-                                    $scope.device.owners[key] =
-                                        value;
-                                }
-                            });
-                        $scope.searched.usernameSelected =
-                            undefined;
-                    });
-
+    $scope.addOwner = function () {
+        $scope.device.resource("owners").save($scope.searched.usernameSelected,
+            function () {
+                $scope.device.resource("owners").get().$promise.then(function (owners) {
+                    angular.forEach(owners,
+                        function (value, key) {
+                            if (!$scope.device.owners[key]) {
+                                $scope.device.owners[key] =
+                                    value;
+                            }
+                        });
+                    $scope.searched.usernameSelected = undefined;
                 });
-        };
 
-    $scope.removeOwner = function(username) {
+            });
+    };
+
+    $scope.removeOwner = function (username) {
         $scope.device.resource("owners").delete({id: username}).$promise.then(function (success) {
             delete $scope.device.owners[username];
         });
@@ -287,10 +283,12 @@ carcloudApp.controller('createDeviceCtrl', function ($scope, Device) {
 });
 
 carcloudApp.controller('editDeviceCtrl', function ($scope, Device) {
-
     $scope.update = function (form) {
-        Device.update(form.device, function () {
-            $scope.devices[form.device.id] = form.device;
+        Device.update(form.device, function (data) {
+            if ($scope.devices) {
+                $scope.devices[form.device.id] = data;
+            }
+            $scope.device = data;
             $scope.editDeviceModal.hide();
         });
     };

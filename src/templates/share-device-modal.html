@@ -12,18 +12,18 @@
         <div class="bar bar-header item-input-inset force-overflow">
             <div class="item-input-wrapper force-remove-bg">
 
-            <input type="text" ng-model="searched.usernameSelected" placeholder="Add new owner"
-                   typeahead="user.username for user in getUsers($viewValue)"
-                   typeahead-wait-ms="200">
+                <input type="text" ng-model="searched.usernameSelected" placeholder="Add new owner"
+                       typeahead="user.username for user in getUsers($viewValue)"
+                       typeahead-wait-ms="200">
             </div>
 
-                <button class="button button-positive" ng-click="addOwner()">
-                    Add
-                </button>
+            <button class="button button-positive" ng-click="addOwner()">
+                Add
+            </button>
         </div>
 
-        <ion-list show-delete="false">
-            <ion-item ng-repeat="owner in device.owners">
+        <ion-list click-for-options-wrapper show-delete="false">
+            <ion-item click-for-options ng-repeat="owner in device.owners">
                 <h2>{{owner.firstName}} {{owner.lastName}}</h2>
 
                 <p>{{owner.username}}</p>

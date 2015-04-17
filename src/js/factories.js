@@ -170,7 +170,7 @@ carcloudApp.factory('AuthenticationService',
 
         authenticationService.valid = function (authorities) {
             if (!$rootScope.isAuthorized(authorities)) {
-                if($rootScope.authenticated) {
+                if ($rootScope.authenticated) {
                     $rootScope.$broadcast("event:auth-notAuthorized");
                 } else {
                     $rootScope.$broadcast("event:auth-loginRequired");
