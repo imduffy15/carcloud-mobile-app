@@ -284,11 +284,13 @@ carcloudApp.controller('createDeviceCtrl', function ($scope, Device) {
 
 carcloudApp.controller('editDeviceCtrl', function ($scope, Device) {
     $scope.update = function (form) {
+        form.device.version = -1;
         Device.update(form.device, function (data) {
             if ($scope.devices) {
-                $scope.devices[form.device.id] = data;
+                $scope.devices[form.device.id].description = data.description;
             }
-            $scope.device = data;
+            $scope.device.description = data.description;
+            $scope.device.version = data.version;
             $scope.editDeviceModal.hide();
         });
     };
