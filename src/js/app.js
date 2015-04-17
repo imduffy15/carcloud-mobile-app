@@ -2,7 +2,7 @@
 
 var httpHeaders;
 
-var carcloudApp = angular.module('carcloudApp', ['ionic', 'ngAnimate', 'ngCordova', 'http-auth-interceptor', 'ngResource', 'ui.gravatar', 'hateoas', 'LocalStorageModule', 'base64', 'ui.select']);
+var carcloudApp = angular.module('carcloudApp', ['ionic', 'ngAnimate', 'ngCordova', 'http-auth-interceptor', 'ngResource', 'ui.gravatar', 'hateoas', 'LocalStorageModule', 'base64', 'ui.bootstrap']);
 
 carcloudApp
     .config(function ($httpProvider, $stateProvider, $urlRouterProvider, USER_ROLES, gravatarServiceProvider, localStorageServiceProvider, HateoasInterceptorProvider) {

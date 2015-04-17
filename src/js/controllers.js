@@ -65,7 +65,7 @@ carcloudApp.controller('DeviceSingleCtrl', function ($scope, $ionicPopover, $ion
 
 
     var div = document.getElementById("map_canvas");
-    var map = plugin.google.maps.Map.getMap(div);
+    var map = {};
 
     $scope.device = device;
 
@@ -234,32 +234,31 @@ carcloudApp.controller('PasswordCtrl', function($scope, $cordovaToast, Account) 
 
 carcloudApp.controller('shareDeviceCtrl', function ($scope, User) {
 
-    $scope.users = [];
-    //
-    //$scope.getUsers = function (username) {
-    //    User.get({'username': username}).$promise.then(function(users) {
-    //        $scope.users = users;
-    //    });
-    //};
+        $scope.searched = {};
 
-    $scope.search = {};
+        $scope.getUsers = function (username) {
+            return User.get({'username': username}).$promise;
+        };
 
-    $scope.addOwner = function () {
-        $scope.device.resource("owners").save($scope.search.selected.username,
-            function () {
-                $scope.device.resource("owners").get().$promise.then(function (owners) {
-                    angular.forEach(owners,
-                        function (value,
-                                  key) {
-                            if (!$scope.device.owners[key]) {
-                                $scope.device.owners[key] =
-                                    value;
-                            }
-                        });
-                    $scope.search.selected = undefined;
+        $scope.addOwner = function () {
+            $scope.device.resource("owners").save($scope.searched.usernameSelected,
+                function () {
+
+                    $scope.device.resource("owners").get().$promise.then(function (owners) {
+                        angular.forEach(owners,
+                            function (value,
+                                      key) {
+                                if (!$scope.device.owners[key]) {
+                                    $scope.device.owners[key] =
+                                        value;
+                                }
+                            });
+                        $scope.searched.usernameSelected =
+                            undefined;
+                    });
+
                 });
-            });
-    };
+        };
 
     $scope.removeOwner = function(username) {
         $scope.device.resource("owners").delete({id: username}).$promise.then(function (success) {
