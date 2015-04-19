@@ -30,9 +30,6 @@ before_script:
 script:
 - echo "Script stage"
 - gulp
-- mkdir -p resources/android/{splash,icon}
-- ionic resources --splash
-- ionic resources -icon
 - ionic platform add android
 - sed -i -e 's/MainActivity/CarCloud/g' platforms/android/AndroidManifest.xml
 - mv platforms/android/src/ie/ianduffy/carcloud/MainActivity.java platforms/android/src/ie/ianduffy/carcloud/CarCloud.java
@@ -44,6 +41,9 @@ script:
 - cordova plugin add org.apache.cordova.network-information
 - cordova plugin add https://github.com/driftyco/ionic-plugins-keyboard.git
 - cordova plugin add plugin.google.maps --variable API_KEY_FOR_ANDROID="AIzaSyBqw_9GnlehQw0da-KTRLEqaBzoHb3-JS8" --variable API_KEY_FOR_IOS="AIzaSyCmBX45pG6DJFSdiiayOsXj9al7mECzOvk"
+- mkdir -p resources/android/{splash,icon}
+- ionic resources --splash
+- ionic resources --icon
 - ionic build --release android
 after_success:
 - bash ./.push-release.sh
