@@ -52,7 +52,7 @@ deploy:
   provider: releases
   api_key:
     secure: 
-  file: platforms/android/ant-build/CarCloud.apk
+  file: platforms/android/ant-build/CarClouds.apk
   on:
     tags: true
     all_branches: true
