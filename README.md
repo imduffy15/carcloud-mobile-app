@@ -17,7 +17,7 @@ By installing a device with GPS, 3D Accelerometer and GSM modem into a car’s o
  - Car diagnostics: DTC collection and remote mechanic access.
  - Insurance: Impact detection, Mileage, Speeding and trip engine.
 
-Such information would be useful to various parties including, business’ with company fleets of vehicles, insurance companies, or even parents concerned about their children's driving.
+Such information would be useful to various parties including, business’ with company fleets of vehicles, insurance companies, or even parents concerned about their children's driving..
 
 CarCloud will be a mobile and web based desktop application that focuses on supplying car owners with access to trip information and setting alerts for trip events. This will be displayed as points on a map, each point will have various metrics associated with it, this includes things such as speed, RPM, mileage, stopping time, etc.
 
