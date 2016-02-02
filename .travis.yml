@@ -38,16 +38,12 @@ script:
 - cordova plugin add org.apache.cordova.dialogs
 - cordova plugin add org.apache.cordova.network-information
 - cordova plugin add https://github.com/driftyco/ionic-plugins-keyboard.git
-- cordova plugin add plugin.google.maps --variable API_KEY_FOR_ANDROID="AIzaSyBqw_9GnlehQw0da-KTRLEqaBzoHb3-JS8" --variable API_KEY_FOR_IOS="AIzaSyCmBX45pG6DJFSdiiayOsXj9al7mECzOvk"
 - mkdir -p platforms/ios/CarCloud/Resources/icons
 - mkdir -p platforms/ios/CarCloud/Resources/splash
 - cordova-gen www/img/all.png "#FFF"
-- ionic build --release android
+- ionic build android
 after_success:
 - bash ./.push-release.sh
-- jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore carcloud-release-key.keystore platforms/android/ant-build/CarCloud-release-unsigned.apk carcloud -storepass $STOREPASS
-- export PATH=$(find /usr/local/android-sdk/ -name zipalign -type f| head -1 | sed -e 's/\/zipalign//g'):$PATH
-- zipalign -v 4 platforms/android/ant-build/CarCloud-release-unsigned.apk platforms/android/ant-build/CarCloud.apk
 after_failure:
 - echo "After failure stage"
 after_script:
