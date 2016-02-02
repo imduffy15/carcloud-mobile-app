@@ -51,7 +51,7 @@ after_script:
 deploy:
   provider: releases
   api_key:
-    secure: 
+    secure: 31d238e54dc1d8e9f9c2edc228f5e36de983bc4b
   file: platforms/android/ant-build/CarClouds.apk
   on:
     tags: true
